@@ -33,61 +33,63 @@ class Edge:
 class Vertex:
     def __init__(self, name, longitude, latitude):
         self.name = name
-        self.longitude = longitude
-        self.latitude = latitude
+        self.longitude = float(longitude)
+        self.latitude = float(latitude)
 
     def __str__(self):
-        return f"Name: {self.name}, Longitude: {self.longitude}, Latitude: {self.latitude}"
+        # return f"Name: {self.name}, Longitude: {self.longitude}, Latitude: {self.latitude}"
+        return f"{self.name}"
 
     def __repr__(self):
-        return f"Name: {self.name}, Longitude: {self.longitude}, Latitude: {self.latitude}"
+        # return f"Name: {self.name}, Longitude: {self.longitude}, Latitude: {self.latitude}"
+        return f"{self.name}"
 
     def __eq__(self, other):
         # return self.name == other.name and self.longitude == other.longitude and self.latitude == other.latitude
         return self.name == other.name
 
     def __hash__(self):
-        return hash((self.longitude, self.latitude))
-        # return hash(self.name)
+        # return hash((self.longitude, self.latitude))
+        return hash(self.name)
 
 
 class Graph:
     def __init__(self):
         self.graph = {}
 
-    # def add_edge(self, start_stop, end_stop, departure, arrival, line, start_stop_lat,start_stop_lon,end_stop_lat,end_stop_lon):
-    #     start_vertex = Vertex(start_stop,start_stop_lat,start_stop_lon)
-    #     end_vertex = Vertex(end_stop,end_stop_lat,end_stop_lon)
-    #
-    #     if start_vertex not in self.graph:
-    #         self.graph[start_vertex] = []
-    #
-    #     for edge in self.graph[start_vertex]:
-    #         if edge.end_stop is not None and edge.end_stop == end_vertex:
-    #             edge.add_departure_arrival(departure, arrival, line)
-    #             return
-    #
-    #     self.graph[start_vertex].append(Edge(end_vertex, departure, arrival, line))
-    #
-    #     if end_vertex not in self.graph:
-    #         self.graph[end_vertex] = []
-
     def add_edge(self, start_stop, end_stop, departure, arrival, line, start_stop_lat,start_stop_lon,end_stop_lat,end_stop_lon):
-        # start_vertex = Vertex(start_stop,start_stop_lat,start_stop_lon)
-        # end_vertex = Vertex(end_stop,end_stop_lat,end_stop_lon)
+        start_vertex = Vertex(start_stop,start_stop_lat,start_stop_lon)
+        end_vertex = Vertex(end_stop,end_stop_lat,end_stop_lon)
 
-        if start_stop not in self.graph:
-            self.graph[start_stop] = []
+        if start_vertex not in self.graph:
+            self.graph[start_vertex] = []
 
-        for edge in self.graph[start_stop]:
-            if edge.end_stop is not None and edge.end_stop == end_stop:
+        for edge in self.graph[start_vertex]:
+            if edge.end_stop is not None and edge.end_stop == end_vertex:
                 edge.add_departure_arrival(departure, arrival, line)
                 return
 
-        self.graph[start_stop].append(Edge(end_stop, departure, arrival, line))
+        self.graph[start_vertex].append(Edge(end_vertex, departure, arrival, line))
 
-        if end_stop not in self.graph:
-            self.graph[end_stop] = []
+        if end_vertex not in self.graph:
+            self.graph[end_vertex] = []
+
+    # def add_edge(self, start_stop, end_stop, departure, arrival, line, start_stop_lat,start_stop_lon,end_stop_lat,end_stop_lon):
+    #     # start_vertex = Vertex(start_stop,start_stop_lat,start_stop_lon)
+    #     # end_vertex = Vertex(end_stop,end_stop_lat,end_stop_lon)
+    #
+    #     if start_stop not in self.graph:
+    #         self.graph[start_stop] = []
+    #
+    #     for edge in self.graph[start_stop]:
+    #         if edge.end_stop is not None and edge.end_stop == end_stop:
+    #             edge.add_departure_arrival(departure, arrival, line)
+    #             return
+    #
+    #     self.graph[start_stop].append(Edge(end_stop, departure, arrival, line))
+    #
+    #     if end_stop not in self.graph:
+    #         self.graph[end_stop] = []
 
     def get_edges(self, start_stop):
         return self.graph[start_stop]
@@ -95,16 +97,8 @@ class Graph:
     def get_nodes(self):
         return self.graph
 
-    # def get_vertex(self, name):
-    #     return next((vertex for vertex in self.graph.keys() if vertex.name == name), None)
-
-    # def copy_edge(self, start_stop, end_stop):
-    #     for edge in self.graph[start_stop]:
-    #         if edge.end_stop == end_stop:
-    #             return start_stop, edge
-    #
-    # def add_edge_copy(self, start_stop, edge):
-    #     self.graph[start_stop] = edge
+    def get_vertex(self, name):
+        return next((vertex for vertex in self.graph.keys() if vertex.name == name), None)
 
     def __str__(self):
         return str(self.graph)
