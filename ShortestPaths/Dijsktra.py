@@ -36,6 +36,27 @@ def calculate_euclides_distance(start_stop, end_stop):
     return math.dist([start_stop.longitude, end_stop.longitude], [start_stop.latitude, end_stop.latitude])
 
 
+def print_path(path, time):
+    print(f"Starting point: {path[0]['stop']}, time: {seconds_to_time(path[0]['connection'][1])}")
+    current_line = None
+    odd = 1
+    for i in range(1, len(path) - 1):
+        if current_line is None:
+            current_line = path[i]['connection'][2]
+            print(f"{path[i]['connection'][2]} | {path[i - 1]['stop']} {seconds_to_time(path[i]['connection'][0])} -> ",
+                  end="")
+            odd += 1
+        elif current_line != path[i]['connection'][2]:
+            print(f"{path[i - 1]['stop']} {seconds_to_time(path[i - 1]['connection'][1])}")
+            print(f"{path[i]['connection'][2]} | {path[i - 1]['stop']} {seconds_to_time(path[i]['connection'][0])} -> ",
+                  end="")
+            current_line = path[i]['connection'][2]
+            odd += 1
+
+    print(f"{path[-1]['stop']} {seconds_to_time(path[-1]['connection'][1])}")
+    print(f"Destination: {path[-1]['stop']}, time: {seconds_to_time(path[-1]['connection'][1])}")
+
+
 def dijkstra(graph, start_stop, end_stop, previous_arrival_time):
     shortest_distance = {}
     predecessor = {}
@@ -77,19 +98,11 @@ def dijkstra(graph, start_stop, end_stop, previous_arrival_time):
 
     current_node = end_stop
     while current_node != start_stop:
-        path.insert(0, current_node)
+        path.insert(0, {'stop': current_node, 'connection': shortest_distance[current_node]['departure_arrival']})
         current_node = predecessor[current_node]['previous_stop']
-    path.insert(0, start_stop)
+    path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['departure_arrival']})
 
-    for stop in path:
-        print(stop, end=" ")
-        print(seconds_to_time(shortest_distance[stop]['departure_arrival'][0]), end=" ")
-        print(seconds_to_time(shortest_distance[stop]['departure_arrival'][1]), end=" ")
-        print(shortest_distance[stop]['departure_arrival'][2])
-
-    print(f"Shortest path: {path}")
-    print(f"Shortest distance: {shortest_distance[end_stop]['cost']}")
-    return path
+    return path, shortest_distance[end_stop]['cost']
 
 
 def astar(graph, start_stop, end_stop, previous_arrival_time):
@@ -111,7 +124,8 @@ def astar(graph, start_stop, end_stop, previous_arrival_time):
 
     while unseen_nodes:
         # min_node = min(unseen_nodes, key=lambda node: calculate_euclides_distance(start_stop, node) + calculate_euclides_distance(end_stop, node))
-        min_node = min(unseen_nodes, key=lambda node: shortest_distance[node]['cost'] + calculate_euclides_distance(end_stop, node))
+        min_node = min(unseen_nodes,
+                       key=lambda node: shortest_distance[node]['cost'] + calculate_euclides_distance(end_stop, node))
         unseen_nodes.pop(min_node)
 
         for child_node in graph.get_edges(min_node):
@@ -134,19 +148,11 @@ def astar(graph, start_stop, end_stop, previous_arrival_time):
 
     current_node = end_stop
     while current_node != start_stop:
-        path.insert(0, current_node)
+        path.insert(0, {'stop': current_node, 'connection': shortest_distance[current_node]['departure_arrival']})
         current_node = predecessor[current_node]['previous_stop']
-    path.insert(0, start_stop)
+    path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['departure_arrival']})
 
-    for stop in path:
-        print(stop, end=" ")
-        print(seconds_to_time(shortest_distance[stop]['departure_arrival'][0]), end=" ")
-        print(seconds_to_time(shortest_distance[stop]['departure_arrival'][1]), end=" ")
-        print(shortest_distance[stop]['departure_arrival'][2])
-
-    print(f"Shortest path: {path}")
-    print(f"Shortest distance: {shortest_distance[end_stop]['cost']}")
-    return path
+    return path, shortest_distance[end_stop]['cost']
 
 
 if __name__ == '__main__':
@@ -156,20 +162,20 @@ if __name__ == '__main__':
 
     dijkstra_start_time = time.time()
     # path = dijkstra(stops_graph, 'PL. GRUNWALDZKI', 'Chełmońskiego', time_to_seconds('08:08:00'))
-    path = dijkstra(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('11:00:00'))
-    # for stop in path[:-1]:
-    #     for edge in stops_graph.get_edges(stop):
-    #         if edge.end_stop == path[path.index(stop) + 1]:
-    #             print(f"From {stop} to {edge.end_stop}")
-    #             break
+    path, travel_time = dijkstra(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('11:00:00'))
     dijkstra_end_time = time.time()
+
+    print_path(path)
+
     print(f"Run time: {dijkstra_end_time - dijkstra_start_time}")
 
     print("--------------------------------------------------------------------------------------------------")
     # path2 = astar(stops_graph, 'PL. GRUNWALDZKI', 'Chełmońskiego', time_to_seconds('08:08:00'))
 
     astar_start_time = time.time()
-    path2 = astar(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('11:00:00'))
+    path2, travel_time2 = astar(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('11:00:00'))
     astar_end_time = time.time()
-    print(f"Run time: {astar_end_time - astar_start_time}")
 
+    print_path(path2)
+
+    print(f"Run time: {astar_end_time - astar_start_time}")
