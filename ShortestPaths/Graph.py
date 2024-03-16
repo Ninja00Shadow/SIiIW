@@ -18,10 +18,22 @@ def seconds_to_time(seconds):
 class Edge:
     def __init__(self, end_stop, arrival, departure, line):
         self.end_stop = end_stop
-        self.departures_arrivals = [(time_to_seconds(departure), time_to_seconds(arrival), line)]
+        arrival = time_to_seconds(arrival)
+        departure = time_to_seconds(departure)
+        night = True if departure > 86400 or arrival > 86400 else False
+        if night:
+            arrival = arrival - 86400
+            departure = departure - 86400
+        self.departures_arrivals = [(departure, arrival, line, night)]
 
     def add_departure_arrival(self, departure, arrival, line):
-        self.departures_arrivals.append((time_to_seconds(departure), time_to_seconds(arrival), line))
+        arrival = time_to_seconds(arrival)
+        departure = time_to_seconds(departure)
+        night = True if departure > 86400 or arrival > 86400 else False
+        if night:
+            arrival = arrival - 86400
+            departure = departure - 86400
+        self.departures_arrivals.append((departure, arrival, line, night))
 
     def __str__(self):
         return f"End stop: {self.end_stop}, Departure and Arrivals: {self.departures_arrivals.__len__()}"
@@ -57,9 +69,10 @@ class Graph:
     def __init__(self):
         self.graph = {}
 
-    def add_edge(self, start_stop, end_stop, departure, arrival, line, start_stop_lat,start_stop_lon,end_stop_lat,end_stop_lon):
-        start_vertex = Vertex(start_stop,start_stop_lat,start_stop_lon)
-        end_vertex = Vertex(end_stop,end_stop_lat,end_stop_lon)
+    def add_edge(self, start_stop, end_stop, departure, arrival, line, start_stop_lat, start_stop_lon, end_stop_lat,
+                 end_stop_lon):
+        start_vertex = Vertex(start_stop, start_stop_lat, start_stop_lon)
+        end_vertex = Vertex(end_stop, end_stop_lat, end_stop_lon)
 
         if start_vertex not in self.graph:
             self.graph[start_vertex] = []

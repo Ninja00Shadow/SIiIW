@@ -8,24 +8,23 @@ from csv_reader_converter import *
 from Graph import time_to_seconds, seconds_to_time
 
 
-def shortest_time(items, pivot):
-    # filtered_items = [item for item in items if item > pivot]
-    filtered_items = [item for item in items if item >= pivot]  # TODO: check if it's correct
+def shortest_time(connections, pivot):
+    filtered_items = [item for item in connections if item >= pivot]
     if len(filtered_items) == 0:
-        return ""
+        return min(connections)
     return min(filtered_items, key=lambda x: abs(x - pivot))
 
 
 def calculate_time_from_previous_arrival_to_next_arrival(previous_arrival_time, departures_arrivals):
-    departures = [departure for departure, arrival, line in departures_arrivals]
+    departures = [departure for departure, arrival, line, night in departures_arrivals]
     nearest_departure = shortest_time(departures, previous_arrival_time)
-    if nearest_departure == "":
-        return sys.maxsize
+    if nearest_departure < previous_arrival_time:
+        return departures_arrivals[departures.index(nearest_departure)][1] + 84600 - previous_arrival_time
     return departures_arrivals[departures.index(nearest_departure)][1] - previous_arrival_time
 
 
 def get_closest_connection(departures_arrivals, previous_arrival_time):
-    departures = [departure for departure, arrival, line in departures_arrivals]
+    departures = [departure for departure, arrival, line, night in departures_arrivals]
     nearest_departure = shortest_time(departures, previous_arrival_time)
     if nearest_departure == "":
         return (0, 0, "")
@@ -227,7 +226,7 @@ if __name__ == '__main__':
     convert_connection_graph_to_graph(proto_graph, stops_graph)
 
     dijkstra_start_time = time.time()
-    path, travel_time = dijkstra(stops_graph, 'Urząd Wojewódzki (Muzeum Narodowe)', 'Tramwajowa', time_to_seconds('5:00:00'))
+    path, travel_time = dijkstra(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('2:00:00'))
     dijkstra_end_time = time.time()
 
     print_path(path)
