@@ -42,6 +42,24 @@ def is_line_in_connections(connections, line):
     return False
 
 
+def get_least_transfer_connection(connections, previous_line):
+    if previous_line[2] == "":
+        return get_closest_connection(connections, previous_line[1])
+
+    filtered_connections = [connection for connection in connections if connection[0] >= previous_line[1]]
+    if len(filtered_connections) == 0:
+        filtered_connections = [connection for connection in connections if connection[0] < previous_line[1]]
+
+    filtered_connections = sorted(filtered_connections, key=lambda x: x[0])
+
+    for connection in filtered_connections:
+        if connection[2] == previous_line[2]:
+            return connection
+
+    return get_closest_connection(connections, previous_line[1])
+
+
+
 def print_path(path):
     sys.stdout.write(f"Starting point: {path[0]['stop']}, time: {seconds_to_time(path[0]['connection'][1])}\n")
     current_line = None
@@ -172,42 +190,30 @@ def astar_transfers(graph, start_stop, end_stop, previous_arrival_time):
 
     for node in unseen_nodes:
         shortest_distance[node] = {
-            'cost': infinity,
             'transfers': infinity,
             'departure_arrival': (0, 0, "")
         }
-    shortest_distance[start_stop]['cost'] = 0
     shortest_distance[start_stop]['transfers'] = 0
     shortest_distance[start_stop]['departure_arrival'] = (0, previous_arrival_time, "")
 
     while unseen_nodes:
         min_node = min(unseen_nodes,
-                       key=lambda node: shortest_distance[node]['cost'] + shortest_distance[node][
-                           'transfers'])  # Aktualizacja sposobu wyboru węzła
+                       key=lambda node: shortest_distance[node]['transfers'] + calculate_euclides_distance(end_stop, node))
         unseen_nodes.pop(min_node)
 
         for child_node in graph.get_edges(min_node):
-            weight = calculate_time_from_previous_arrival_to_next_arrival(
-                shortest_distance[min_node]['departure_arrival'][1],
-                child_node.departures_arrivals
-            )
+            next_connection = get_least_transfer_connection(child_node.departures_arrivals,
+                                                            shortest_distance[min_node]['departure_arrival'])
 
-            transfers = 1 if not is_line_in_connections(child_node.departures_arrivals,
-                                                        shortest_distance[min_node]['departure_arrival'][2]) else 0
+            transfers = 1 if not next_connection[2] == shortest_distance[min_node]['departure_arrival'][2] else 0
 
-            cost = weight + shortest_distance[min_node]['cost'] + transfers * 60
-
-            if cost < shortest_distance[child_node.end_stop]['cost']:
-                shortest_distance[child_node.end_stop]['cost'] = cost
+            if transfers + shortest_distance[min_node]['transfers'] < shortest_distance[child_node.end_stop]['transfers']:
                 shortest_distance[child_node.end_stop]['transfers'] = shortest_distance[min_node][
                                                                           'transfers'] + transfers
                 predecessor[child_node.end_stop] = {'previous_stop': min_node}
-                shortest_distance[child_node.end_stop]['departure_arrival'] = (
-                    get_closest_connection(child_node.departures_arrivals,
-                                           shortest_distance[min_node]['departure_arrival'][1])
-                )
+                shortest_distance[child_node.end_stop]['departure_arrival'] = next_connection
 
-    if shortest_distance[end_stop]['cost'] == infinity:
+    if shortest_distance[end_stop]['transfers'] == infinity:
         print("Path not reachable")
         return None
 
@@ -217,16 +223,41 @@ def astar_transfers(graph, start_stop, end_stop, previous_arrival_time):
         current_node = predecessor[current_node]['previous_stop']
     path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['departure_arrival']})
 
-    return path, shortest_distance[end_stop]['cost']
+    return path, shortest_distance[end_stop]['transfers']
+
+
+def cli():
+    print("Starting point: ")
+    start_stop = input()
+    print("Destination: ")
+    end_stop = input()
+    print("Criteria: (t) time, (p) transfers ")
+    criteria = input()
+    print("Time: ")
+    time = input()
+
+    start_time = time.time()
+    if criteria == 't':
+        path, travel_time = dijkstra(stops_graph, start_stop, end_stop, time_to_seconds(time))
+    elif criteria == 'p':
+        path, number_of_transfers = astar_transfers(stops_graph, start_stop, end_stop, time_to_seconds(time))
+    end_time = time.time()
+
+    print_path(path)
+    if criteria == 't':
+        sys.stderr.write(f"Travel time: {seconds_to_time(travel_time)}\n")
+    elif criteria == 'p':
+        sys.stderr.write(f"Number of transfers: {number_of_transfers}\n")
+    sys.stderr.write(f"Run time: {end_time - start_time}\n")
 
 
 if __name__ == '__main__':
-    proto_graph = read_connection_graph_file('connection_graph_old.csv')
+    proto_graph = read_connection_graph_file('connection_graph.csv')
     stops_graph = Graph()
     convert_connection_graph_to_graph(proto_graph, stops_graph)
 
     dijkstra_start_time = time.time()
-    path, travel_time = dijkstra(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('2:00:00'))
+    path, travel_time = dijkstra(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('11:00:00'))
     dijkstra_end_time = time.time()
 
     print_path(path)
@@ -236,7 +267,7 @@ if __name__ == '__main__':
     print("--------------------------------------------------------------------------------------------------")
 
     astar_start_time = time.time()
-    path2, travel_time2 = astar(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('11:00:00'))
+    path2, travel_time2 = astar(stops_graph, 'Iwiny - rondo', 'Hala Stulecia', time_to_seconds('14:38:00'))
     astar_end_time = time.time()
 
     print_path(path2)
@@ -246,7 +277,7 @@ if __name__ == '__main__':
     print("--------------------------------------------------------------------------------------------------")
 
     astar_transfers_start_time = time.time()
-    path3, travel_time3 = astar_transfers(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('11:00:00'))
+    path3, travel_time3 = astar_transfers(stops_graph, 'Iwiny - rondo', 'Hala Stulecia', time_to_seconds('14:38:00'))
     astar_transfers_end_time = time.time()
 
     print_path(path3)
