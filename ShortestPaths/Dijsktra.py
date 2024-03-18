@@ -1,7 +1,8 @@
 import math
 import sys
 import time
-from heapq import heappush, heapify
+import geopy.distance
+from math import sin, cos, sqrt, atan2, radians
 
 from csv_reader_converter import *
 
@@ -32,7 +33,29 @@ def get_closest_connection(departures_arrivals, previous_arrival_time):
 
 
 def calculate_euclides_distance(start_stop, end_stop):
-    return math.dist([start_stop.longitude, end_stop.longitude], [start_stop.latitude, end_stop.latitude])
+    # return geopy.distance.geodesic([start_stop.longitude, end_stop.longitude], [start_stop.latitude, end_stop.latitude]).m
+    R = 6373.0
+
+    lat1 = radians(start_stop.latitude)
+    lon1 = radians(start_stop.longitude)
+    lat2 = radians(end_stop.latitude)
+    lon2 = radians(end_stop.longitude)
+
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    return R * c * 1000
+
+
+def time_heuristic(start_stop, end_stop):
+    return calculate_euclides_distance(start_stop, end_stop) / 30
+
+
+def transfer_heuristic(start_stop, end_stop):
+    return calculate_euclides_distance(start_stop, end_stop) / 5000
 
 
 def is_line_in_connections(connections, line):
@@ -57,7 +80,6 @@ def get_least_transfer_connection(connections, previous_line):
             return connection
 
     return get_closest_connection(connections, previous_line[1])
-
 
 
 def print_path(path):
@@ -147,9 +169,8 @@ def astar(graph, start_stop, end_stop, previous_arrival_time):
     shortest_distance[start_stop]['departure_arrival'] = (0, previous_arrival_time, "")
 
     while unseen_nodes:
-        # min_node = min(unseen_nodes, key=lambda node: calculate_euclides_distance(start_stop, node) + calculate_euclides_distance(end_stop, node))
         min_node = min(unseen_nodes,
-                       key=lambda node: shortest_distance[node]['cost'] + calculate_euclides_distance(end_stop, node))
+                       key=lambda node: shortest_distance[node]['cost'] + time_heuristic(end_stop, node))
         unseen_nodes.pop(min_node)
 
         for child_node in graph.get_edges(min_node):
@@ -165,6 +186,16 @@ def astar(graph, start_stop, end_stop, previous_arrival_time):
                     get_closest_connection(child_node.departures_arrivals,
                                            shortest_distance[min_node]['departure_arrival'][1])
                 )
+
+            if child_node.end_stop == end_stop:
+                current_node = end_stop
+                while current_node != start_stop:
+                    path.insert(0, {'stop': current_node,
+                                    'connection': shortest_distance[current_node]['departure_arrival']})
+                    current_node = predecessor[current_node]['previous_stop']
+                path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['departure_arrival']})
+
+                return path, shortest_distance[end_stop]['cost']
 
     if shortest_distance[end_stop]['cost'] == infinity:
         print("Path not reachable")
@@ -198,7 +229,7 @@ def astar_transfers(graph, start_stop, end_stop, previous_arrival_time):
 
     while unseen_nodes:
         min_node = min(unseen_nodes,
-                       key=lambda node: shortest_distance[node]['transfers'] + calculate_euclides_distance(end_stop, node))
+                       key=lambda node: shortest_distance[node]['transfers'] + transfer_heuristic(end_stop, node))
         unseen_nodes.pop(min_node)
 
         for child_node in graph.get_edges(min_node):
@@ -207,11 +238,22 @@ def astar_transfers(graph, start_stop, end_stop, previous_arrival_time):
 
             transfers = 1 if not next_connection[2] == shortest_distance[min_node]['departure_arrival'][2] else 0
 
-            if transfers + shortest_distance[min_node]['transfers'] < shortest_distance[child_node.end_stop]['transfers']:
+            if transfers + shortest_distance[min_node]['transfers'] < shortest_distance[child_node.end_stop][
+                'transfers']:
                 shortest_distance[child_node.end_stop]['transfers'] = shortest_distance[min_node][
                                                                           'transfers'] + transfers
                 predecessor[child_node.end_stop] = {'previous_stop': min_node}
                 shortest_distance[child_node.end_stop]['departure_arrival'] = next_connection
+
+            if child_node.end_stop == end_stop:
+                current_node = end_stop
+                while current_node != start_stop:
+                    path.insert(0, {'stop': current_node,
+                                    'connection': shortest_distance[current_node]['departure_arrival']})
+                    current_node = predecessor[current_node]['previous_stop']
+                path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['departure_arrival']})
+
+                return path, shortest_distance[end_stop]['transfers']
 
     if shortest_distance[end_stop]['transfers'] == infinity:
         print("Path not reachable")
@@ -257,7 +299,7 @@ if __name__ == '__main__':
     convert_connection_graph_to_graph(proto_graph, stops_graph)
 
     dijkstra_start_time = time.time()
-    path, travel_time = dijkstra(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('11:00:00'))
+    path, travel_time = dijkstra(stops_graph, 'Iwiny - rondo', 'Hala Stulecia', time_to_seconds('14:38:00'))
     dijkstra_end_time = time.time()
 
     print_path(path)

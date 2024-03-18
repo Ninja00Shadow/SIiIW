@@ -130,7 +130,7 @@ def testCase103(graph):
 
 
 if __name__ == '__main__':
-    proto_graph = read_connection_graph_file('connection_graph2.csv')
+    proto_graph = read_connection_graph_file('connection_graph.csv')
     stops_graph = Graph()
     convert_connection_graph_to_graph(proto_graph, stops_graph)
 
