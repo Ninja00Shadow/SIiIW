@@ -1,0 +1,63 @@
+Number of transfers: 1
+Run time: 0.07703137397766113
+Starting point: Iwiny - rondo, time: 14:38:00
+145 | Iwiny - rondo 14:39:00 -> Hala Stulecia 15:25:00
+Destination: Hala Stulecia, time: 15:25:00
+---------------------------------------------------------------------------------------------------------
+Number of transfers: 3
+Run time: 0.17200636863708496
+Starting point: Stanki, time: 11:00:00
+A | Stanki 11:03:00 -> FAT 11:11:00
+107 | FAT 11:19:00 -> PRACZE ODRZAŃSKIE 12:02:00
+101 | PRACZE ODRZAŃSKIE 12:07:00 -> Lubelska 12:10:00
+Destination: Lubelska, time: 12:10:00
+---------------------------------------------------------------------------------------------------------
+Number of transfers: 3
+Run time: 0.11083078384399414
+Starting point: Brzezia Łąka - Główna, time: 11:15:00
+931 | Brzezia Łąka - Główna 12:39:00 -> Psie Pole (Rondo Lotników Polskich) 13:01:00
+251 | Psie Pole (Rondo Lotników Polskich) 00:52:00 -> DWORZEC GŁÓWNY 01:18:00
+206 | DWORZEC GŁÓWNY 01:18:00 -> Arkady (Capitol) 01:20:00
+Destination: Arkady (Capitol), time: 01:20:00
+---------------------------------------------------------------------------------------------------------
+Number of transfers: 2
+Run time: 0.15068411827087402
+Starting point: Jerzmanowo (Cmentarz I), time: 09:34:00
+142 | Jerzmanowo (Cmentarz I) 09:35:00 -> Rynek 10:45:00
+132 | Rynek 10:51:00 -> pl. Daniłowskiego 11:09:00
+Destination: pl. Daniłowskiego, time: 11:09:00
+---------------------------------------------------------------------------------------------------------
+Number of transfers: 2
+Run time: 0.02204108238220215
+Starting point: rondo Św. Ojca Pio, time: 17:16:00
+113 | rondo Św. Ojca Pio 17:27:00 -> KRZYKI 17:38:00
+A | KRZYKI 17:48:00 -> Sowia 17:49:00
+Destination: Sowia, time: 17:49:00
+---------------------------------------------------------------------------------------------------------
+Number of transfers: 4
+Run time: 0.4771451950073242
+Starting point: C.H. Aleja Bielany, time: 16:49:00
+133 | C.H. Aleja Bielany 16:53:00 -> Hallera 17:24:00
+144 | Hallera 17:25:00 -> rondo Św. Ojca Pio 17:36:00
+913 | rondo Św. Ojca Pio 17:37:00 -> Wysoka - Radosna 17:40:00
+612 | Wysoka - Radosna 18:28:00 -> Ślęza - skrzyżowanie 18:32:00
+Destination: Ślęza - skrzyżowanie, time: 18:32:00
+---------------------------------------------------------------------------------------------------------
+Number of transfers: 4
+Run time: 0.4066805839538574
+Starting point: Tczewska, time: 14:32:00
+118 | Tczewska 14:35:00 -> WOJNÓW (pętla) 15:15:00
+920 | WOJNÓW (pętla) 15:48:00 -> Międzyrzecka 16:13:00
+143 | Międzyrzecka 16:16:00 -> Armii Krajowej 16:18:00
+5 | Armii Krajowej 16:18:00 -> Park Wschodni 16:19:00
+Destination: Park Wschodni, time: 16:19:00
+---------------------------------------------------------------------------------------------------------
+Number of transfers: 4
+Run time: 0.1462574005126953
+Starting point: Miękinia Cegielnia, time: 09:09:00
+948 | Miękinia Cegielnia 11:16:00 -> Rubczaka 11:40:00
+117 | Rubczaka 11:57:00 -> Piołunowa 13:58:00
+129 | Piołunowa 14:11:00 -> PORT LOTNICZY 14:19:00
+106 | PORT LOTNICZY 14:24:00 -> Rdestowa 14:26:00
+Destination: Rdestowa, time: 14:26:00
+---------------------------------------------------------------------------------------------------------

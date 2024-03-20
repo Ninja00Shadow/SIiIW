@@ -1,0 +1,72 @@
+Time variant
+Travel time: 00:38:00
+Run time: 0.30697035789489746
+Starting point: Iwiny - rondo, time: 14:38:00
+145 | Iwiny - rondo 14:39:00 -> BARDZKA (Cmentarz) 14:48:00
+110 | BARDZKA (Cmentarz) 14:49:00 -> Morwowa 14:50:00
+136 | Morwowa 14:51:00 -> TARNOGAJ 14:53:00
+100 | TARNOGAJ 14:57:00 -> Karwińska 15:01:00
+5 | Karwińska 15:02:00 -> Armii Krajowej 15:04:00
+143 | Armii Krajowej 15:05:00 -> Chełmońskiego 15:10:00
+4 | Chełmońskiego 15:10:00 -> Tramwajowa 15:11:00
+315 | Tramwajowa 15:13:00 -> Hala Stulecia 15:16:00
+Destination: Hala Stulecia, time: 15:16:00
+---------------------------------------------------------------------------------------------------------
+
+Transfers variant
+Number of transfers: 1
+Run time: 0.07606363296508789
+Starting point: Iwiny - rondo, time: 14:38:00
+145 | Iwiny - rondo 14:39:00 -> Hala Stulecia 15:25:00
+Destination: Hala Stulecia, time: 15:25:00
+---------------------------------------------------------------------------------------------------------
+
+
+
+Time variant
+Travel time: 01:26:00
+Run time: 0.22280550003051758
+Starting point: Miękinia Cegielnia, time: 14:16:00
+948 | Miękinia Cegielnia 14:46:00 -> Średzka 15:09:00
+148 | Średzka 15:09:00 -> Jerzmanowska nr 17 15:22:00
+129 | Jerzmanowska nr 17 15:24:00 -> PORT LOTNICZY 15:36:00
+106 | PORT LOTNICZY 15:40:00 -> Rdestowa 15:42:00
+Destination: Rdestowa, time: 15:42:00
+---------------------------------------------------------------------------------------------------------
+
+Transfers variant
+Number of transfers: 4
+Run time: 0.1499645709991455
+Starting point: Miękinia Cegielnia, time: 14:16:00
+948 | Miękinia Cegielnia 14:46:00 -> Rubczaka 15:10:00
+117 | Rubczaka 15:27:00 -> Piołunowa 15:59:00
+129 | Piołunowa 16:00:00 -> PORT LOTNICZY 16:08:00
+106 | PORT LOTNICZY 16:10:00 -> Rdestowa 16:12:00
+Destination: Rdestowa, time: 16:12:00
+---------------------------------------------------------------------------------------------------------
+
+
+
+Time variant
+Travel time: 00:52:00
+Run time: 1.1376054286956787
+Starting point: Krucza, time: 15:05:00
+125 | Krucza 15:05:00 -> DWORZEC AUTOBUSOWY 15:16:00
+110 | DWORZEC AUTOBUSOWY 15:16:00 -> DWORZEC GŁÓWNY 15:19:00
+9 | DWORZEC GŁÓWNY 15:19:00 -> GALERIA DOMINIKAŃSKA 15:24:00
+12 | GALERIA DOMINIKAŃSKA 15:24:00 -> PL. GRUNWALDZKI 15:32:00
+911 | PL. GRUNWALDZKI 15:33:00 -> Kochanowskiego 15:35:00
+111 | Kochanowskiego 15:35:00 -> Psie Pole (Rondo Lotników Polskich) 15:50:00
+N | Psie Pole (Rondo Lotników Polskich) 15:50:00 -> Inflancka 15:57:00
+Destination: Inflancka, time: 15:57:00
+---------------------------------------------------------------------------------------------------------
+
+Transfers variant
+Number of transfers: 3
+Run time: 0.26384425163269043
+Starting point: Krucza, time: 15:05:00
+144 | Krucza 15:05:00 -> Broniewskiego 15:38:00
+130 | Broniewskiego 15:38:00 -> Psie Pole (Rondo Lotników Polskich) 16:04:00
+N | Psie Pole (Rondo Lotników Polskich) 16:05:00 -> Inflancka 16:12:00
+Destination: Inflancka, time: 16:12:00
+---------------------------------------------------------------------------------------------------------

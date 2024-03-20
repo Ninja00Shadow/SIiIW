@@ -24,7 +24,7 @@ class Edge:
         if night:
             arrival = arrival - 86400
             departure = departure - 86400
-        self.departures_arrivals = [(departure, arrival, line, night)]
+        self.connections = [(departure, arrival, line, night)]
 
     def add_departure_arrival(self, departure, arrival, line):
         arrival = time_to_seconds(arrival)
@@ -33,13 +33,13 @@ class Edge:
         if night:
             arrival = arrival - 86400
             departure = departure - 86400
-        self.departures_arrivals.append((departure, arrival, line, night))
+        self.connections.append((departure, arrival, line, night))
 
     def __str__(self):
-        return f"End stop: {self.end_stop}, Departure and Arrivals: {self.departures_arrivals.__len__()}"
+        return f"End stop: {self.end_stop}, Departure and Arrivals: {self.connections.__len__()}"
 
     def __repr__(self):
-        return f"End stop: {self.end_stop}, Departure and Arrivals: {self.departures_arrivals.__len__()}"
+        return f"End stop: {self.end_stop}, Departure and Arrivals: {self.connections.__len__()}"
 
 
 class Vertex:

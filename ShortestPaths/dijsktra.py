@@ -1,12 +1,11 @@
 import math
 import sys
 import time
-import geopy.distance
 from math import sin, cos, sqrt, atan2, radians
 
 from csv_reader_converter import *
 
-from Graph import time_to_seconds, seconds_to_time
+from graph import time_to_seconds, seconds_to_time
 
 
 def shortest_time(connections, pivot):
@@ -85,19 +84,16 @@ def get_least_transfer_connection(connections, previous_line):
 def print_path(path):
     sys.stdout.write(f"Starting point: {path[0]['stop']}, time: {seconds_to_time(path[0]['connection'][1])}\n")
     current_line = None
-    odd = 1
-    for i in range(1, len(path) - 1):
+    for i in range(1, len(path)):
         if current_line is None:
             current_line = path[i]['connection'][2]
             sys.stdout.write(
                 f"{path[i]['connection'][2]} | {path[i - 1]['stop']} {seconds_to_time(path[i]['connection'][0])} -> ")
-            odd += 1
         elif current_line != path[i]['connection'][2]:
             sys.stdout.write(f"{path[i - 1]['stop']} {seconds_to_time(path[i - 1]['connection'][1])}\n")
             sys.stdout.write(
                 f"{path[i]['connection'][2]} | {path[i - 1]['stop']} {seconds_to_time(path[i]['connection'][0])} -> ")
             current_line = path[i]['connection'][2]
-            odd += 1
 
     sys.stdout.write(f"{path[-1]['stop']} {seconds_to_time(path[-1]['connection'][1])}\n")
     sys.stdout.write(f"Destination: {path[-1]['stop']}, time: {seconds_to_time(path[-1]['connection'][1])}\n")
@@ -127,14 +123,14 @@ def dijkstra(graph, start_stop, end_stop, previous_arrival_time):
         for child_node in graph.get_edges(min_node):
             weight = calculate_time_from_previous_arrival_to_next_arrival(
                 shortest_distance[min_node]['departure_arrival'][1],
-                child_node.departures_arrivals
+                child_node.connections
             )
 
             if weight + shortest_distance[min_node]['cost'] < shortest_distance[child_node.end_stop]['cost']:
                 shortest_distance[child_node.end_stop]['cost'] = weight + shortest_distance[min_node]['cost']
                 predecessor[child_node.end_stop] = {'previous_stop': min_node}
                 shortest_distance[child_node.end_stop]['departure_arrival'] = (
-                    get_closest_connection(child_node.departures_arrivals,
+                    get_closest_connection(child_node.connections,
                                            shortest_distance[min_node]['departure_arrival'][1])
                 )
 
@@ -176,14 +172,14 @@ def astar(graph, start_stop, end_stop, previous_arrival_time):
         for child_node in graph.get_edges(min_node):
             weight = calculate_time_from_previous_arrival_to_next_arrival(
                 shortest_distance[min_node]['departure_arrival'][1],
-                child_node.departures_arrivals
+                child_node.connections
             )
 
             if weight + shortest_distance[min_node]['cost'] < shortest_distance[child_node.end_stop]['cost']:
                 shortest_distance[child_node.end_stop]['cost'] = weight + shortest_distance[min_node]['cost']
                 predecessor[child_node.end_stop] = {'previous_stop': min_node}
                 shortest_distance[child_node.end_stop]['departure_arrival'] = (
-                    get_closest_connection(child_node.departures_arrivals,
+                    get_closest_connection(child_node.connections,
                                            shortest_distance[min_node]['departure_arrival'][1])
                 )
 
@@ -233,7 +229,7 @@ def astar_transfers(graph, start_stop, end_stop, previous_arrival_time):
         unseen_nodes.pop(min_node)
 
         for child_node in graph.get_edges(min_node):
-            next_connection = get_least_transfer_connection(child_node.departures_arrivals,
+            next_connection = get_least_transfer_connection(child_node.connections,
                                                             shortest_distance[min_node]['departure_arrival'])
 
             transfers = 1 if not next_connection[2] == shortest_distance[min_node]['departure_arrival'][2] else 0

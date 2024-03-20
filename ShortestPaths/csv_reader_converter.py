@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 
-from Graph import Graph
+from graph import Graph
 
 
 def read_connection_graph_file(file_name='connection_graph.csv'):

@@ -1,132 +1,99 @@
-from Dijsktra import *
-from Graph import Graph
+from dijsktra import *
+from graph import Graph
 from csv_reader_converter import convert_connection_graph_to_graph, read_connection_graph_file
 
 
-def testCase1(graph):
-    path, travel_time = dijkstra(stops_graph, 'Stanki', 'Lubelska', time_to_seconds('11:00:00'))
+def general_test_case(graph, criteria, start_stop, end_stop, start_time):
+    start_time = time_to_seconds(start_time)
+    alg_start_time = time.time()
+    if criteria == 'dt':
+        path, travel_time = dijkstra(graph, start_stop, end_stop, start_time)
+    elif criteria == 'at':
+        path, travel_time = astar(graph, start_stop, end_stop, start_time)
+    elif criteria == 'p':
+        path, number_of_transfers = astar_transfers(graph, start_stop, end_stop, start_time)
+    alg_end_time = time.time()
 
-    print(seconds_to_time(travel_time))
+    if criteria == 'dt' or criteria == 'at':
+        sys.stderr.write(f"Travel time: {seconds_to_time(travel_time)}\n")
+    elif criteria == 'p':
+        sys.stderr.write(f"Number of transfers: {number_of_transfers}\n")
+    sys.stderr.write(f"Run time: {alg_end_time - alg_start_time}\n")
     print_path(path)
 
     print('---------------------------------------------------------------------------------------------------------')
 
 
-def testCase2(graph):
-    path, travel_time = astar(stops_graph, 'Brzezia Łąka - Główna', 'Arkady (Capitol)', time_to_seconds('11:15:00'))
-
-    print(seconds_to_time(travel_time))
-    print_path(path)
-
-    print('---------------------------------------------------------------------------------------------------------')
-
-
-def testCase3(graph):
-    path, travel_time = dijkstra(stops_graph, 'Jerzmanowo (Cmentarz I)', 'pl. Daniłowskiego',
-                                 time_to_seconds('09:34:00'))
-
-    print(seconds_to_time(travel_time))
-    print_path(path)
-
-    print('---------------------------------------------------------------------------------------------------------')
+def dijkstra_test_cases(graph):
+    general_test_case(graph, 'dt', 'Stanki', 'Lubelska', '11:00:00')
+    general_test_case(graph, 'dt', 'Brzezia Łąka - Główna', 'Arkady (Capitol)', '11:15:00')
+    general_test_case(graph, 'dt', 'Jerzmanowo (Cmentarz I)', 'pl. Daniłowskiego', '09:34:00')
+    general_test_case(graph, 'dt', 'rondo Św. Ojca Pio', 'Sowia', '17:16:00')
+    general_test_case(graph, 'dt', 'C.H. Aleja Bielany', 'Ślęza - skrzyżowanie', '16:49:00')
+    general_test_case(graph, 'dt', 'Tczewska', 'Park Wschodni', '14:32:00')
+    general_test_case(graph, 'dt', 'Miękinia Cegielnia', 'Rdestowa', '09:09:00')
 
 
-def testCase4(graph):
-    path, travel_time = dijkstra(stops_graph, 'rondo Św. Ojca Pio', 'Sowia', time_to_seconds('17:16:00'))
-
-    print(seconds_to_time(travel_time))
-    print_path(path)
-
-    print('---------------------------------------------------------------------------------------------------------')
-
-
-def testCase5(graph):
-    path, travel_time = dijkstra(stops_graph, 'C.H. Aleja Bielany', 'Ślęza - skrzyżowanie', time_to_seconds('16:49:00'))
-
-    print(seconds_to_time(travel_time))
-    print_path(path)
-
-    print('---------------------------------------------------------------------------------------------------------')
+def astar_test_cases(graph):
+    general_test_case(graph, 'at', 'Stanki', 'Lubelska', '11:00:00')
+    general_test_case(graph, 'at', 'Brzezia Łąka - Główna', 'Arkady (Capitol)', '11:15:00')
+    general_test_case(graph, 'at', 'Jerzmanowo (Cmentarz I)', 'pl. Daniłowskiego', '09:34:00')
+    general_test_case(graph, 'at', 'rondo Św. Ojca Pio', 'Sowia', '17:16:00')
+    general_test_case(graph, 'at', 'C.H. Aleja Bielany', 'Ślęza - skrzyżowanie', '16:49:00')
+    general_test_case(graph, 'at', 'Tczewska', 'Park Wschodni', '14:32:00')
+    general_test_case(graph, 'at', 'Miękinia Cegielnia', 'Rdestowa', '09:09:00')
 
 
-def testCase6(graph):
-    path, travel_time = dijkstra(stops_graph, 'Tczewska', 'Park Wschodni', time_to_seconds('14:32:00'))
-
-    print(seconds_to_time(travel_time))
-    print_path(path)
-
-    print('---------------------------------------------------------------------------------------------------------')
-
-
-def testCase7(graph):
-    path, travel_time = astar(stops_graph, 'Miękinia Cegielnia', 'Rdestowa', time_to_seconds('09:09:00'))
-
-    print(seconds_to_time(travel_time))
-    print_path(path)
-
-    print('---------------------------------------------------------------------------------------------------------')
+def transfers_test_cases(graph):
+    general_test_case(graph, 'p', 'Iwiny - rondo', 'Hala Stulecia', '14:38:00')
+    general_test_case(graph, 'p', 'Stanki', 'Lubelska', '11:00:00')
+    general_test_case(graph, 'p', 'Brzezia Łąka - Główna', 'Arkady (Capitol)', '11:15:00')
+    general_test_case(graph, 'p', 'Jerzmanowo (Cmentarz I)', 'pl. Daniłowskiego', '09:34:00')
+    general_test_case(graph, 'p', 'rondo Św. Ojca Pio', 'Sowia', '17:16:00')
+    general_test_case(graph, 'p', 'C.H. Aleja Bielany', 'Ślęza - skrzyżowanie', '16:49:00')
+    general_test_case(graph, 'p', 'Tczewska', 'Park Wschodni', '14:32:00')
+    general_test_case(graph, 'p', 'Miękinia Cegielnia', 'Rdestowa', '09:09:00')
 
 
-def time_test_cases(graph):
-    testCase1(graph)
-    testCase2(graph)
-    testCase3(graph)
-    testCase4(graph)
-    testCase5(graph)
-    testCase6(graph)
-    testCase7(graph)
-
-
-def testCase101(graph):
+def time_transfers_comparison_test_cases(graph):
     print('Time variant')
-    path, travel_time = astar(stops_graph, 'Iwiny - rondo', 'Hala Stulecia', time_to_seconds('14:38:00'))
+    general_test_case(graph, 'at', 'Iwiny - rondo', 'Hala Stulecia', '14:38:00')
+    print()
 
-    print(seconds_to_time(travel_time))
-    print_path(path)
+    print('Transfers variant')
+    general_test_case(graph, 'p', 'Iwiny - rondo', 'Hala Stulecia', '14:38:00')
 
     print()
-    print('Transfers variant')
-    path, number_of_transfers = astar_transfers(stops_graph, 'Iwiny - rondo', 'Hala Stulecia',
-                                                time_to_seconds('14:38:00'))
+    print()
+    print()
 
-    print(number_of_transfers)
-    print_path(path)
-
-    print('---------------------------------------------------------------------------------------------------------')
-
-
-def testCase102(graph):
     print('Time variant')
-    path, travel_time = astar(stops_graph, 'Miękinia Cegielnia', 'Rdestowa', time_to_seconds('14:16:00'))
+    general_test_case(graph, 'at', 'Miękinia Cegielnia', 'Rdestowa', '14:16:00')
+    print()
 
-    print(seconds_to_time(travel_time))
-    print_path(path)
+    print('Transfers variant')
+    general_test_case(graph, 'p', 'Miękinia Cegielnia', 'Rdestowa', '14:16:00')
 
     print()
-    print('Transfers variant')
-    path, number_of_transfers = astar_transfers(stops_graph, 'Miękinia Cegielnia', 'Rdestowa', time_to_seconds('14:16:00'))
-
-    print(number_of_transfers)
-    print_path(path)
-
-    print('---------------------------------------------------------------------------------------------------------')
-
-
-def testCase103(graph):
-    print('Time variant')
-    path, travel_time = astar(stops_graph, 'Krucza', 'Inflancka', time_to_seconds('15:05:00'))
-
-    print(seconds_to_time(travel_time))
-    print_path(path)
-
     print()
+    print()
+
+    print('Time variant')
+    general_test_case(graph, 'at', 'Krucza', 'Inflancka', '15:05:00')
+    print()
+
     print('Transfers variant')
-    path, number_of_transfers = astar_transfers(stops_graph, 'Krucza', 'Inflancka', time_to_seconds('15:05:00'))
+    general_test_case(graph, 'p', 'Krucza', 'Inflancka', '15:05:00')
 
-    print(number_of_transfers)
-    print_path(path)
 
-    print('---------------------------------------------------------------------------------------------------------')
+def average_number_of_connections_in_edges(graph):
+    sum_of_connections = 0
+    edges = 0
+    for key in graph.get_nodes():
+        for edge in graph.get_edges(key):
+            edges += 1
+            sum_of_connections += len(edge.connections)
+    return sum_of_connections / edges
 
 
 if __name__ == '__main__':
@@ -134,12 +101,24 @@ if __name__ == '__main__':
     stops_graph = Graph()
     convert_connection_graph_to_graph(proto_graph, stops_graph)
 
-    time_test_cases(stops_graph)
+    # print(average_number_of_connections_in_edges(stops_graph))
+
+    dijkstra_test_cases(stops_graph)
 
     print()
     print()
     print()
 
-    testCase101(stops_graph)
-    testCase102(stops_graph)
-    testCase103(stops_graph)
+    astar_test_cases(stops_graph)
+
+    print()
+    print()
+    print()
+
+    transfers_test_cases(stops_graph)
+
+    print()
+    print()
+    print()
+
+    time_transfers_comparison_test_cases(stops_graph)
