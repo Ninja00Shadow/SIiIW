@@ -129,13 +129,13 @@ if __name__ == '__main__':
 
     # print(average_number_of_connections_in_edges(stops_graph))
 
-    dijkstra_test_cases(stops_graph)
+    # dijkstra_test_cases(stops_graph)
 
     print()
     print()
     print()
 
-    astar_test_cases(stops_graph)
+    # astar_test_cases(stops_graph)
 
     print()
     print()
@@ -153,10 +153,10 @@ if __name__ == '__main__':
     print()
     print()
 
-    alt_astar_test_cases(stops_graph)
+    # alt_astar_test_cases(stops_graph)
 
     print()
     print()
     print()
 
-    alt_astar_transfers_test_cases(stops_graph)
+    # alt_astar_transfers_test_cases(stops_graph)
