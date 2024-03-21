@@ -108,10 +108,10 @@ def dijkstra(graph, start_stop, end_stop, previous_arrival_time):
     for node in unseen_nodes:
         shortest_distance[node] = {
             'cost': infinity,
-            'departure_arrival': (0, 0, "")
+            'connection': (0, 0, "")
         }
     shortest_distance[start_stop]['cost'] = 0
-    shortest_distance[start_stop]['departure_arrival'] = (0, previous_arrival_time, "")
+    shortest_distance[start_stop]['connection'] = (0, previous_arrival_time, "")
 
     while unseen_nodes:
         min_node = min(unseen_nodes, key=lambda node: shortest_distance[node]['cost'])
@@ -119,12 +119,12 @@ def dijkstra(graph, start_stop, end_stop, previous_arrival_time):
 
         for child_node in graph.get_edges(min_node):
             connection, weight = get_closest_connection_and_weight(child_node.connections,
-                                                                  shortest_distance[min_node]['departure_arrival'][1])
+                                                                  shortest_distance[min_node]['connection'][1])
 
             if weight + shortest_distance[min_node]['cost'] < shortest_distance[child_node.end_stop]['cost']:
                 shortest_distance[child_node.end_stop]['cost'] = weight + shortest_distance[min_node]['cost']
                 predecessor[child_node.end_stop] = {'previous_stop': min_node}
-                shortest_distance[child_node.end_stop]['departure_arrival'] = connection
+                shortest_distance[child_node.end_stop]['connection'] = connection
 
     if shortest_distance[end_stop]['cost'] == infinity:
         print("Path not reachable")
@@ -132,9 +132,9 @@ def dijkstra(graph, start_stop, end_stop, previous_arrival_time):
 
     current_node = end_stop
     while current_node != start_stop:
-        path.insert(0, {'stop': current_node, 'connection': shortest_distance[current_node]['departure_arrival']})
+        path.insert(0, {'stop': current_node, 'connection': shortest_distance[current_node]['connection']})
         current_node = predecessor[current_node]['previous_stop']
-    path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['departure_arrival']})
+    path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['connection']})
 
     return path, shortest_distance[end_stop]['cost']
 
@@ -151,10 +151,10 @@ def astar(graph, start_stop, end_stop, previous_arrival_time):
     for node in unseen_nodes:
         shortest_distance[node] = {
             'cost': infinity,
-            'departure_arrival': (0, 0, "")
+            'connection': (0, 0, "")
         }
     shortest_distance[start_stop]['cost'] = 0
-    shortest_distance[start_stop]['departure_arrival'] = (0, previous_arrival_time, "")
+    shortest_distance[start_stop]['connection'] = (0, previous_arrival_time, "")
 
     while unseen_nodes:
         min_node = min(unseen_nodes,
@@ -163,20 +163,20 @@ def astar(graph, start_stop, end_stop, previous_arrival_time):
 
         for child_node in graph.get_edges(min_node):
             connection, weight = get_closest_connection_and_weight(child_node.connections,
-                                                                  shortest_distance[min_node]['departure_arrival'][1])
+                                                                  shortest_distance[min_node]['connection'][1])
 
             if weight + shortest_distance[min_node]['cost'] < shortest_distance[child_node.end_stop]['cost']:
                 shortest_distance[child_node.end_stop]['cost'] = weight + shortest_distance[min_node]['cost']
                 predecessor[child_node.end_stop] = {'previous_stop': min_node}
-                shortest_distance[child_node.end_stop]['departure_arrival'] = connection
+                shortest_distance[child_node.end_stop]['connection'] = connection
 
             if child_node.end_stop == end_stop:
                 current_node = end_stop
                 while current_node != start_stop:
                     path.insert(0, {'stop': current_node,
-                                    'connection': shortest_distance[current_node]['departure_arrival']})
+                                    'connection': shortest_distance[current_node]['connection']})
                     current_node = predecessor[current_node]['previous_stop']
-                path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['departure_arrival']})
+                path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['connection']})
 
                 return path, shortest_distance[end_stop]['cost']
 
@@ -186,9 +186,9 @@ def astar(graph, start_stop, end_stop, previous_arrival_time):
 
     current_node = end_stop
     while current_node != start_stop:
-        path.insert(0, {'stop': current_node, 'connection': shortest_distance[current_node]['departure_arrival']})
+        path.insert(0, {'stop': current_node, 'connection': shortest_distance[current_node]['connection']})
         current_node = predecessor[current_node]['previous_stop']
-    path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['departure_arrival']})
+    path.insert(0, {'stop': start_stop, 'connection': shortest_distance[start_stop]['connection']})
 
     return path, shortest_distance[end_stop]['cost']
 
