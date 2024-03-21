@@ -1,11 +1,11 @@
 Number of transfers: 1
-Run time: 0.08059096336364746
+Run time: 0.07515978813171387
 Starting point: Iwiny - rondo, time: 14:38:00
 145 | Iwiny - rondo 14:39:00 -> Hala Stulecia 15:25:00
 Destination: Hala Stulecia, time: 15:25:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 3
-Run time: 0.4439418315887451
+Run time: 0.4129929542541504
 Starting point: Stanki, time: 11:00:00
 A | Stanki 11:03:00 -> Bałtycka 17:43:00
 103 | Bałtycka 20:51:00 -> Brodzka 21:33:00
@@ -13,14 +13,14 @@ A | Stanki 11:03:00 -> Bałtycka 17:43:00
 Destination: Lubelska, time: 21:38:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 2
-Run time: 0.14484715461730957
+Run time: 0.15335798263549805
 Starting point: Brzezia Łąka - Główna, time: 11:15:00
 931 | Brzezia Łąka - Główna 12:39:00 -> Psie Pole (Rondo Lotników Polskich) 13:01:00
 D | Psie Pole (Rondo Lotników Polskich) 13:01:00 -> Arkady (Capitol) 13:30:00
 Destination: Arkady (Capitol), time: 13:30:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 3
-Run time: 0.16170072555541992
+Run time:  0.14256525039672852
 Starting point: Jerzmanowo (Cmentarz I), time: 09:34:00
 142 | Jerzmanowo (Cmentarz I) 09:35:00 -> Zajezdnia Obornicka 17:35:00
 N | Zajezdnia Obornicka 20:27:00 -> Berenta 20:38:00
@@ -28,14 +28,14 @@ N | Zajezdnia Obornicka 20:27:00 -> Berenta 20:38:00
 Destination: pl. Daniłowskiego, time: 20:40:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 2
-Run time: 0.06325626373291016
+Run time: 0.06760692596435547
 Starting point: rondo Św. Ojca Pio, time: 17:16:00
 113 | rondo Św. Ojca Pio 17:27:00 -> KRZYKI 17:38:00
 A | KRZYKI 17:48:00 -> Sowia 17:49:00
 Destination: Sowia, time: 17:49:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 4
-Run time: 0.8896265029907227
+Run time: 0.9193522930145264
 Starting point: C.H. Aleja Bielany, time: 16:49:00
 133 | C.H. Aleja Bielany 16:53:00 -> Zimowa 17:10:00
 D | Zimowa 17:11:00 -> KRZYKI 17:14:00
@@ -44,7 +44,7 @@ D | Zimowa 17:11:00 -> KRZYKI 17:14:00
 Destination: Ślęza - skrzyżowanie, time: 22:22:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 4
-Run time: 0.5201442241668701
+Run time: 0.5452876091003418
 Starting point: Tczewska, time: 14:32:00
 118 | Tczewska 14:35:00 -> WOJNÓW (pętla) 15:15:00
 920 | WOJNÓW (pętla) 15:48:00 -> Międzyrzecka 16:13:00
@@ -53,7 +53,7 @@ Starting point: Tczewska, time: 14:32:00
 Destination: Park Wschodni, time: 16:19:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 4
-Run time: 0.5318312644958496
+Run time: 0.5964572429656982
 Starting point: Miękinia Cegielnia, time: 09:09:00
 948 | Miękinia Cegielnia 11:16:00 -> Rubczaka 11:40:00
 117 | Rubczaka 11:57:00 -> Piołunowa 13:58:00

@@ -1,5 +1,5 @@
 Travel time: 01:00:00
-Run time: 1.0608503818511963
+Run time: 0.22243857383728027
 Starting point: Stanki, time: 11:00:00
 A | Stanki 11:03:00 -> FAT 11:11:00
 126 | FAT 11:14:00 -> KUŹNIKI 11:29:00
@@ -9,7 +9,7 @@ A | Stanki 11:03:00 -> FAT 11:11:00
 Destination: Lubelska, time: 12:00:00
 ---------------------------------------------------------------------------------------------
 Travel time: 02:15:00
-Run time: 0.3777308464050293
+Run time: 0.0799560546875
 Starting point: Brzezia Łąka - Główna, time: 11:15:00
 931 | Brzezia Łąka - Główna 12:39:00 -> Psie Pole (Rondo Lotników Polskich) 13:01:00
 D | Psie Pole (Rondo Lotników Polskich) 13:01:00 -> Poczta Główna 13:21:00
@@ -19,7 +19,7 @@ A | Renoma 13:28:00 -> Arkady (Capitol) 13:30:00
 Destination: Arkady (Capitol), time: 13:30:00
 ---------------------------------------------------------------------------------------------
 Travel time: 00:45:00
-Run time: 0.6771576404571533
+Run time: 0.2630748748779297
 Starting point: Jerzmanowo (Cmentarz I), time: 09:34:00
 142 | Jerzmanowo (Cmentarz I) 09:35:00 -> Kołobrzeska 09:44:00
 129 | Kołobrzeska 09:47:00 -> Na Ostatnim Groszu 09:56:00
@@ -32,7 +32,7 @@ K | Bałtycka 10:12:00 -> Broniewskiego 10:14:00
 Destination: pl. Daniłowskiego, time: 10:19:00
 ---------------------------------------------------------------------------------------------
 Travel time: 00:18:00
-Run time: 0.08600497245788574
+Run time: 0.03721904754638672
 Starting point: rondo Św. Ojca Pio, time: 17:16:00
 144 | rondo Św. Ojca Pio 17:16:00 -> Hallera 17:26:00
 14 | Hallera 17:26:00 -> KRZYKI 17:31:00
@@ -40,7 +40,7 @@ A | KRZYKI 17:33:00 -> Sowia 17:34:00
 Destination: Sowia, time: 17:34:00
 ---------------------------------------------------------------------------------------------
 Travel time: 00:52:00
-Run time: 0.5836985111236572
+Run time: 0.1741957664489746
 Starting point: C.H. Aleja Bielany, time: 16:49:00
 133 | C.H. Aleja Bielany 16:53:00 -> KLECINA 17:07:00
 17 | KLECINA 17:09:00 -> Przyjaźni 17:12:00
@@ -49,7 +49,7 @@ Starting point: C.H. Aleja Bielany, time: 16:49:00
 Destination: Ślęza - skrzyżowanie, time: 17:41:00
 ---------------------------------------------------------------------------------------------
 Travel time: 00:25:00
-Run time: 0.22059035301208496
+Run time: 0.06949281692504883
 Starting point: Tczewska, time: 14:32:00
 118 | Tczewska 14:35:00 -> SĘPOLNO 14:44:00
 9 | SĘPOLNO 14:45:00 -> 8 Maja 14:47:00
@@ -58,7 +58,7 @@ Starting point: Tczewska, time: 14:32:00
 Destination: Park Wschodni, time: 14:57:00
 ---------------------------------------------------------------------------------------------
 Travel time: 03:22:00
-Run time: 0.4145181179046631
+Run time: 0.1502838134765625
 Starting point: Miękinia Cegielnia, time: 09:09:00
 948 | Miękinia Cegielnia 11:16:00 -> Średzka 11:39:00
 137 | Średzka 11:39:00 -> LEŚNICA 11:42:00
