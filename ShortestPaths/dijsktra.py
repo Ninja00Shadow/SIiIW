@@ -58,14 +58,7 @@ def time_heuristic(start_stop, end_stop):
 
 
 def transfer_heuristic(start_stop, end_stop):
-    return calculate_euclides_distance(start_stop, end_stop) / 3000
-
-
-def is_line_in_connections(connections, line):
-    for connection in connections:
-        if connection[2] == line:
-            return True
-    return False
+    return calculate_euclides_distance(start_stop, end_stop) / 5000
 
 
 def get_least_transfer_connection(connections, previous_line):
@@ -268,6 +261,10 @@ def cli():
     print("Time: ")
     time = input()
 
+    proto_graph = read_connection_graph_file('connection_graph.csv')
+    stops_graph = Graph()
+    convert_connection_graph_to_graph(proto_graph, stops_graph)
+
     start_time = time.time()
     if criteria == 't':
         path, travel_time = dijkstra(stops_graph, start_stop, end_stop, time_to_seconds(time))
@@ -284,34 +281,4 @@ def cli():
 
 
 if __name__ == '__main__':
-    proto_graph = read_connection_graph_file('connection_graph.csv')
-    stops_graph = Graph()
-    convert_connection_graph_to_graph(proto_graph, stops_graph)
-
-    dijkstra_start_time = time.time()
-    path, travel_time = dijkstra(stops_graph, 'Iwiny - rondo', 'Hala Stulecia', time_to_seconds('14:38:00'))
-    dijkstra_end_time = time.time()
-
-    print_path(path)
-    sys.stderr.write(f"Travel time: {seconds_to_time(travel_time)}\n")
-    sys.stderr.write(f"Run time: {dijkstra_end_time - dijkstra_start_time}\n")
-
-    print("--------------------------------------------------------------------------------------------------")
-
-    astar_start_time = time.time()
-    path2, travel_time2 = astar(stops_graph, 'Iwiny - rondo', 'Hala Stulecia', time_to_seconds('14:38:00'))
-    astar_end_time = time.time()
-
-    print_path(path2)
-    sys.stderr.write(f"Travel time: {seconds_to_time(travel_time2)}\n")
-    sys.stderr.write(f"Run time: {astar_end_time - astar_start_time}\n")
-
-    print("--------------------------------------------------------------------------------------------------")
-
-    astar_transfers_start_time = time.time()
-    path3, travel_time3 = astar_transfers(stops_graph, 'Iwiny - rondo', 'Hala Stulecia', time_to_seconds('14:38:00'))
-    astar_transfers_end_time = time.time()
-
-    print_path(path3)
-    sys.stderr.write(f"Travel time: {seconds_to_time(travel_time3)}\n")
-    sys.stderr.write(f"Run time: {astar_transfers_end_time - astar_transfers_start_time}\n")
+    cli()

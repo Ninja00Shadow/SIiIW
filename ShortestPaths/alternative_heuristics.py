@@ -48,7 +48,7 @@ def alt_astar(graph, start_stop, end_stop, previous_arrival_time):
         unseen_nodes.pop(min_node)
 
         for child_node in graph.get_edges(min_node):
-            connection, weight = get_closest_connection(
+            connection, weight = get_closest_connection_and_weight(
                 child_node.connections,
                 shortest_distance[min_node]['connection'][1]
             )
