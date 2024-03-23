@@ -2,10 +2,8 @@ from datetime import datetime
 
 
 def time_to_seconds(time):
-    hours = int(time.split(':')[0])
-    minutes = int(time.split(':')[1])
-    seconds2 = int(time.split(':')[2])
-    return hours * 3600 + minutes * 60 + seconds2
+    hours, minutes, seconds = [int(part) for part in time.split(':')]
+    return hours * 3600 + minutes * 60 + seconds
 
 
 def seconds_to_time(seconds):
@@ -55,6 +53,8 @@ class Vertex:
         return f"{self.name}"
 
     def __eq__(self, other):
+        if type(other) is str:
+            return self.name == other
         return self.name == other.name
 
     def __hash__(self):
