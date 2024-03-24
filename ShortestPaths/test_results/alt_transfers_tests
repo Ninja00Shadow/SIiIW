@@ -1,63 +1,68 @@
-Number of transfers: 1
-Run time: 0.07515978813171387
-Starting point: Iwiny - rondo, time: 14:38:00
-145 | Iwiny - rondo 14:39:00 -> Hala Stulecia 15:25:00
-Destination: Hala Stulecia, time: 15:25:00
+Number of transfers: 2
+Run time: 0.12344813346862793
+Starting point: Iwiny - rondo 17.06086879 51.04509727, time: 14:38:00
+145 | Iwiny - rondo 17.06086879 51.04509727 14:39:00 -> Hala Stulecia 17.07283232 51.10703996 15:25:00
+Foot | Hala Stulecia 17.07283232 51.10703996 15:25:00 -> Hala Stulecia 17.07372026 51.10689468 15:26:00
+Destination: Hala Stulecia 17.07372026 51.10689468, time: 15:26:00
+---------------------------------------------------------------------------------------------------------
+Number of transfers: 4
+Run time: 3.132197618484497
+Starting point: Stanki 16.97383436 51.07616146, time: 11:00:00
+Foot | Stanki 16.97383436 51.07616146 11:00:00 -> Stanki 16.97206692 51.07632585 11:01:00
+A | Stanki 16.97206692 51.07632585 11:03:00 -> Wiejska 16.96391602 51.07763602 11:05:00
+607 | Wiejska 16.96391602 51.07763602 15:14:00 -> Kwiska 16.98341998 51.12558237 15:34:00
+101 | Kwiska 16.98341998 51.12558237 15:44:00 -> Lubelska 16.91914727 51.16391631 16:00:00
+Destination: Lubelska 16.91914727 51.16391631, time: 16:00:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 3
-Run time: 0.4129929542541504
-Starting point: Stanki, time: 11:00:00
-A | Stanki 11:03:00 -> Bałtycka 17:43:00
-103 | Bałtycka 20:51:00 -> Brodzka 21:33:00
-101 | Brodzka 21:37:00 -> Lubelska 21:38:00
-Destination: Lubelska, time: 21:38:00
----------------------------------------------------------------------------------------------------------
-Number of transfers: 2
-Run time: 0.15335798263549805
-Starting point: Brzezia Łąka - Główna, time: 11:15:00
-931 | Brzezia Łąka - Główna 12:39:00 -> Psie Pole (Rondo Lotników Polskich) 13:01:00
-D | Psie Pole (Rondo Lotników Polskich) 13:01:00 -> Arkady (Capitol) 13:30:00
-Destination: Arkady (Capitol), time: 13:30:00
+Run time: 0.3411431312561035
+Starting point: Brzezia Łąka - Główna 17.26496862 51.12254252, time: 11:15:00
+Foot | Brzezia Łąka - Główna 17.26496862 51.12254252 11:15:00 -> Brzezia Łąka - Główna 17.26490854 51.12261512 11:16:00
+931 | Brzezia Łąka - Główna 17.26490854 51.12261512 12:39:00 -> Psie Pole (Rondo Lotników Polskich) 17.114363 51.14714 13:01:00
+D | Psie Pole (Rondo Lotników Polskich) 17.114363 51.14714 13:01:00 -> Arkady (Capitol) 17.02946781 51.1020902 13:30:00
+Destination: Arkady (Capitol) 17.02946781 51.1020902, time: 13:30:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 3
-Run time:  0.14256525039672852
-Starting point: Jerzmanowo (Cmentarz I), time: 09:34:00
-142 | Jerzmanowo (Cmentarz I) 09:35:00 -> Zajezdnia Obornicka 17:35:00
-N | Zajezdnia Obornicka 20:27:00 -> Berenta 20:38:00
-105 | Berenta 20:39:00 -> pl. Daniłowskiego 20:40:00
-Destination: pl. Daniłowskiego, time: 20:40:00
+Run time: 2.795335292816162
+Starting point: Jerzmanowo (Cmentarz I) 16.88600906 51.12410886, time: 09:34:00
+142 | Jerzmanowo (Cmentarz I) 16.88600906 51.12410886 09:35:00 -> Zajezdnia Obornicka 17.02106859 51.14873744 17:35:00
+N | Zajezdnia Obornicka 17.02106859 51.14873744 20:27:00 -> Syrokomli 17.048892 51.137303 20:36:00
+119 | Syrokomli 17.048892 51.137303 20:42:00 -> pl. Daniłowskiego 17.06030177 51.13881054 20:44:00
+Destination: pl. Daniłowskiego 17.06030177 51.13881054, time: 20:44:00
 ---------------------------------------------------------------------------------------------------------
-Number of transfers: 2
-Run time: 0.06760692596435547
-Starting point: rondo Św. Ojca Pio, time: 17:16:00
-113 | rondo Św. Ojca Pio 17:27:00 -> KRZYKI 17:38:00
-A | KRZYKI 17:48:00 -> Sowia 17:49:00
-Destination: Sowia, time: 17:49:00
----------------------------------------------------------------------------------------------------------
-Number of transfers: 4
-Run time: 0.9193522930145264
-Starting point: C.H. Aleja Bielany, time: 16:49:00
-133 | C.H. Aleja Bielany 16:53:00 -> Zimowa 17:10:00
-D | Zimowa 17:11:00 -> KRZYKI 17:14:00
-602 | KRZYKI 21:48:00 -> Partynice (tor wyścigów konnych) 21:52:00
-612 | Partynice (tor wyścigów konnych) 22:11:00 -> Ślęza - skrzyżowanie 22:22:00
-Destination: Ślęza - skrzyżowanie, time: 22:22:00
+Number of transfers: 3
+Run time: 1.1133244037628174
+Starting point: rondo Św. Ojca Pio 17.00686865 51.05918996, time: 17:16:00
+Foot | rondo Św. Ojca Pio 17.00686865 51.05918996 17:16:00 -> rondo Św. Ojca Pio 17.007513 51.060096 17:17:00
+127 | rondo Św. Ojca Pio 17.007513 51.060096 17:19:00 -> GRABISZYŃSKA (Cmentarz) 16.97664203 51.08990377 23:19:00
+A | GRABISZYŃSKA (Cmentarz) 16.97664203 51.08990377 04:25:00 -> Sowia 17.00162009 51.07374877 04:38:00
+Destination: Sowia 17.00162009 51.07374877, time: 04:38:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 4
-Run time: 0.5452876091003418
-Starting point: Tczewska, time: 14:32:00
-118 | Tczewska 14:35:00 -> WOJNÓW (pętla) 15:15:00
-920 | WOJNÓW (pętla) 15:48:00 -> Międzyrzecka 16:13:00
-143 | Międzyrzecka 16:16:00 -> Armii Krajowej 16:18:00
-5 | Armii Krajowej 16:18:00 -> Park Wschodni 16:19:00
-Destination: Park Wschodni, time: 16:19:00
+Run time: 4.238588333129883
+Starting point: C.H. Aleja Bielany 16.96122886 51.04792155, time: 16:49:00
+133 | C.H. Aleja Bielany 16.96122886 51.04792155 16:53:00 -> Zimowa 17.00000936 51.07132853 17:10:00
+107 | Zimowa 17.00000936 51.07132853 17:22:00 -> KRZYKI 17.00623189 51.074855 17:24:00
+602 | KRZYKI 17.00623189 51.074855 21:48:00 -> Partynice (tor wyścigów konnych) 16.99597183 51.061305 21:52:00
+612 | Partynice (tor wyścigów konnych) 16.99597183 51.061305 22:11:00 -> Ślęza - skrzyżowanie 16.98475 51.036997 22:22:00
+Destination: Ślęza - skrzyżowanie 16.98475 51.036997, time: 22:22:00
 ---------------------------------------------------------------------------------------------------------
 Number of transfers: 4
-Run time: 0.5964572429656982
-Starting point: Miękinia Cegielnia, time: 09:09:00
-948 | Miękinia Cegielnia 11:16:00 -> Rubczaka 11:40:00
-117 | Rubczaka 11:57:00 -> Piołunowa 13:58:00
-129 | Piołunowa 14:11:00 -> PORT LOTNICZY 14:19:00
-106 | PORT LOTNICZY 14:24:00 -> Rdestowa 14:26:00
-Destination: Rdestowa, time: 14:26:00
+Run time: 2.5667407512664795
+Starting point: Tczewska 17.11194969 51.13060657, time: 14:32:00
+118 | Tczewska 17.11194969 51.13060657 14:35:00 -> WOJNÓW (pętla) 17.16596794 51.09590148 15:15:00
+920 | WOJNÓW (pętla) 17.16596794 51.09590148 15:48:00 -> GALERIA DOMINIKAŃSKA 17.04117731 51.1089984 16:26:00
+114 | GALERIA DOMINIKAŃSKA 17.04117731 51.1089984 16:31:00 -> Armii Krajowej 17.06947 51.086705 16:47:00
+3 | Armii Krajowej 17.06947 51.086705 16:51:00 -> Park Wschodni 17.07219405 51.08488586 16:52:00
+Destination: Park Wschodni 17.07219405 51.08488586, time: 16:52:00
+---------------------------------------------------------------------------------------------------------
+Number of transfers: 5
+Run time: 3.517839193344116
+Starting point: Miękinia Cegielnia 16.724634 51.188315, time: 09:09:00
+Foot | Miękinia Cegielnia 16.724634 51.188315 09:09:00 -> Miękinia Cegielnia 16.724656 51.188244 09:10:00
+948 | Miękinia Cegielnia 16.724656 51.188244 11:16:00 -> Średzka 16.86660794 51.14535622 14:04:00
+148 | Średzka 16.86660794 51.14535622 14:07:00 -> Strzegomska (krzyżówka) 16.960639 51.112407 15:28:00
+13 | Strzegomska (krzyżówka) 16.960639 51.112407 15:28:00 -> Rogowska (P+R) 16.95572 51.110391 15:30:00
+106 | Rogowska (P+R) 16.95572 51.110391 15:37:00 -> Rdestowa 16.88805774 51.11127473 15:50:00
+Destination: Rdestowa 16.88805774 51.11127473, time: 15:50:00
 ---------------------------------------------------------------------------------------------------------

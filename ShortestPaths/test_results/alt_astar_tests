@@ -1,72 +1,95 @@
 Travel time: 01:00:00
-Run time: 1.0162007808685303
-Starting point: Stanki, time: 11:00:00
-A | Stanki 11:03:00 -> FAT 11:11:00
-126 | FAT 11:14:00 -> KUŹNIKI 11:29:00
-152 | KUŹNIKI 11:29:00 -> TARCZYŃSKI ARENA (Królewiecka) 11:38:00
-102 | TARCZYŃSKI ARENA (Królewiecka) 11:42:00 -> Brodzka 11:50:00
-101 | Brodzka 11:58:00 -> Lubelska 12:00:00
-Destination: Lubelska, time: 12:00:00
+Run time: 4.934797763824463
+Starting point: Stanki 16.97383436 51.07616146, time: 11:00:00
+Foot | Stanki 16.97383436 51.07616146 11:00:00 -> Stanki 16.97206692 51.07632585 11:01:00
+A | Stanki 16.97206692 51.07632585 11:03:00 -> FAT 16.98037615 51.09375561 11:11:00
+Foot | FAT 16.98037615 51.09375561 11:11:00 -> FAT 16.97946312 51.09514288 11:13:00
+126 | FAT 16.97946312 51.09514288 11:14:00 -> Szkocka 16.9688408 51.11014182 11:18:00
+119 | Szkocka 16.9688408 51.11014182 11:19:00 -> Kwiska 16.98351443 51.125275 11:26:00
+Foot | Kwiska 16.98351443 51.125275 11:26:00 -> Kwiska 16.98320659 51.1254882 11:28:00
+12 | Kwiska 16.98320659 51.1254882 11:28:00 -> Górnicza 16.95945079 51.14019836 11:35:00
+18 | Górnicza 16.95945079 51.14019836 11:36:00 -> TARCZYŃSKI ARENA (Królewiecka) 16.94996015 51.14356746 11:39:00
+Foot | TARCZYŃSKI ARENA (Królewiecka) 16.94996015 51.14356746 11:39:00 -> TARCZYŃSKI ARENA (Królewiecka) 16.949136 51.14516204 11:40:00
+102 | TARCZYŃSKI ARENA (Królewiecka) 16.949136 51.14516204 11:42:00 -> Brodzka 16.92406355 51.15757455 11:50:00
+Foot | Brodzka 16.92406355 51.15757455 11:50:00 -> Brodzka 16.9229924 51.1568793 11:51:00
+101 | Brodzka 16.9229924 51.1568793 11:58:00 -> Lubelska 16.91914727 51.16391631 12:00:00
+Destination: Lubelska 16.91914727 51.16391631, time: 12:00:00
 ---------------------------------------------------------------------------------------------------------
 Travel time: 02:15:00
-Run time: 0.35948729515075684
-Starting point: Brzezia Łąka - Główna, time: 11:15:00
-931 | Brzezia Łąka - Główna 12:39:00 -> Psie Pole (Rondo Lotników Polskich) 13:01:00
-D | Psie Pole (Rondo Lotników Polskich) 13:01:00 -> Poczta Główna 13:21:00
-149 | Poczta Główna 13:21:00 -> Wzgórze Partyzantów 13:25:00
-148 | Wzgórze Partyzantów 13:25:00 -> Renoma 13:27:00
-A | Renoma 13:28:00 -> Arkady (Capitol) 13:30:00
-Destination: Arkady (Capitol), time: 13:30:00
+Run time: 1.6687977313995361
+Starting point: Brzezia Łąka - Główna 17.26496862 51.12254252, time: 11:15:00
+Foot | Brzezia Łąka - Główna 17.26496862 51.12254252 11:15:00 -> Brzezia Łąka - Główna 17.26490854 51.12261512 11:16:00
+931 | Brzezia Łąka - Główna 17.26490854 51.12261512 12:39:00 -> Psie Pole (Rondo Lotników Polskich) 17.114363 51.14714 13:01:00
+D | Psie Pole (Rondo Lotników Polskich) 17.114363 51.14714 13:01:00 -> Poczta Główna 17.04563742 51.1078565 13:21:00
+149 | Poczta Główna 17.04563742 51.1078565 13:21:00 -> Wzgórze Partyzantów 17.03849027 51.10378692 13:25:00
+148 | Wzgórze Partyzantów 17.03849027 51.10378692 13:25:00 -> Renoma 17.03231779 51.10412651 13:27:00
+A | Renoma 17.03231779 51.10412651 13:28:00 -> Arkady (Capitol) 17.02946781 51.1020902 13:30:00
+Destination: Arkady (Capitol) 17.02946781 51.1020902, time: 13:30:00
 ---------------------------------------------------------------------------------------------------------
-Travel time: 00:45:00
-Run time: 0.699986457824707
-Starting point: Jerzmanowo (Cmentarz I), time: 09:34:00
-142 | Jerzmanowo (Cmentarz I) 09:35:00 -> Kołobrzeska 09:44:00
-129 | Kołobrzeska 09:47:00 -> Na Ostatnim Groszu 09:56:00
-119 | Na Ostatnim Groszu 09:56:00 -> Kwiska 09:59:00
-104 | Kwiska 09:59:00 -> most Milenijny 10:04:00
-119 | most Milenijny 10:04:00 -> OSOBOWICKA (Cmentarz II) 10:07:00
-129 | OSOBOWICKA (Cmentarz II) 10:07:00 -> Bałtycka 10:12:00
-K | Bałtycka 10:12:00 -> Broniewskiego 10:14:00
-105 | Broniewskiego 10:14:00 -> pl. Daniłowskiego 10:19:00
-Destination: pl. Daniłowskiego, time: 10:19:00
+Travel time: 00:44:00
+Run time: 3.3199524879455566
+Starting point: Jerzmanowo (Cmentarz I) 16.88600906 51.12410886, time: 09:34:00
+142 | Jerzmanowo (Cmentarz I) 16.88600906 51.12410886 09:35:00 -> Kołobrzeska 16.94541342 51.12103055 09:44:00
+Foot | Kołobrzeska 16.94541342 51.12103055 09:44:00 -> Kołobrzeska 16.94699382 51.12153718 09:45:00
+129 | Kołobrzeska 16.94699382 51.12153718 09:47:00 -> Na Ostatnim Groszu 16.97654068 51.12338989 09:56:00
+119 | Na Ostatnim Groszu 16.97654068 51.12338989 09:56:00 -> Kwiska 16.98351443 51.125275 09:59:00
+104 | Kwiska 16.98351443 51.125275 09:59:00 -> most Milenijny 17.0004071 51.13666865 10:04:00
+119 | most Milenijny 17.0004071 51.13666865 10:04:00 -> OSOBOWICKA (Cmentarz II) 17.01095511 51.13453676 10:07:00
+129 | OSOBOWICKA (Cmentarz II) 17.01095511 51.13453676 10:07:00 -> Bałtycka 17.0306168 51.13663187 10:12:00
+105 | Bałtycka 17.0306168 51.13663187 10:12:00 -> Kasprowicza 17.05367076 51.13786515 10:17:00
+119 | Kasprowicza 17.05367076 51.13786515 10:17:00 -> pl. Daniłowskiego 17.06030177 51.13881054 10:18:00
+Destination: pl. Daniłowskiego 17.06030177 51.13881054, time: 10:18:00
 ---------------------------------------------------------------------------------------------------------
-Travel time: 00:18:00
-Run time: 0.0881805419921875
-Starting point: rondo Św. Ojca Pio, time: 17:16:00
-144 | rondo Św. Ojca Pio 17:16:00 -> Hallera 17:26:00
-14 | Hallera 17:26:00 -> KRZYKI 17:31:00
-A | KRZYKI 17:33:00 -> Sowia 17:34:00
-Destination: Sowia, time: 17:34:00
+Travel time: 00:23:00
+Run time: 0.46332859992980957
+Starting point: rondo Św. Ojca Pio 17.00686865 51.05918996, time: 17:16:00
+Foot | rondo Św. Ojca Pio 17.00686865 51.05918996 17:16:00 -> rondo Św. Ojca Pio 17.007513 51.060096 17:17:00
+127 | rondo Św. Ojca Pio 17.007513 51.060096 17:19:00 -> Weigla (Szpital) 17.01912014 51.07739937 17:25:00
+Foot | Weigla (Szpital) 17.01912014 51.07739937 17:25:00 -> Weigla (Szpital) 17.01836232 51.07697043 17:26:00
+15 | Weigla (Szpital) 17.01836232 51.07697043 17:28:00 -> PARK POŁUDNIOWY 17.01447843 51.07267109 17:30:00
+Foot | PARK POŁUDNIOWY 17.01447843 51.07267109 17:30:00 -> PARK POŁUDNIOWY 17.01074356 51.07262005 17:31:00
+126 | PARK POŁUDNIOWY 17.01074356 51.07262005 17:34:00 -> Sowia 17.00184494 51.07379262 17:38:00
+Foot | Sowia 17.00184494 51.07379262 17:38:00 -> Sowia 17.00162009 51.07374877 17:39:00
+Destination: Sowia 17.00162009 51.07374877, time: 17:39:00
 ---------------------------------------------------------------------------------------------------------
-Travel time: 00:52:00
-Run time: 0.9857237339019775
-Starting point: C.H. Aleja Bielany, time: 16:49:00
-133 | C.H. Aleja Bielany 16:53:00 -> KLECINA 17:07:00
-17 | KLECINA 17:09:00 -> Przyjaźni 17:12:00
-113 | Przyjaźni 17:16:00 -> Ołtaszyn 17:29:00
-612 | Ołtaszyn 17:31:00 -> Ślęza - skrzyżowanie 17:41:00
-Destination: Ślęza - skrzyżowanie, time: 17:41:00
+Travel time: 01:33:00
+Run time: 5.315369129180908
+Starting point: C.H. Aleja Bielany 16.96122886 51.04792155, time: 16:49:00
+133 | C.H. Aleja Bielany 16.96122886 51.04792155 16:53:00 -> WAŁBRZYSKA 16.97952811 51.06395512 17:04:00
+D | WAŁBRZYSKA 16.97952811 51.06395512 17:12:00 -> KLECINA 16.98742499 51.06540717 17:15:00
+Foot | KLECINA 16.98742499 51.06540717 17:15:00 -> KLECINA 16.98735013 51.06566863 17:16:00
+7 | KLECINA 16.98735013 51.06566863 17:17:00 -> Przyjaźni 17.00354717 51.06850211 17:20:00
+Foot | Przyjaźni 17.00354717 51.06850211 17:20:00 -> Przyjaźni 17.00377275 51.06786642 17:22:00
+113 | Przyjaźni 17.00377275 51.06786642 17:31:00 -> Partynice (tor wyścigów konnych) 16.99850862 51.06085699 17:35:00
+Foot | Partynice (tor wyścigów konnych) 16.99850862 51.06085699 17:35:00 -> Partynice (tor wyścigów konnych) 16.99597183 51.061305 17:37:00
+612 | Partynice (tor wyścigów konnych) 16.99597183 51.061305 18:10:00 -> Bielany Wrocławskie - Boczna 16.96816056 51.03737682 18:16:00
+Foot | Bielany Wrocławskie - Boczna 16.96816056 51.03737682 18:16:00 -> Bielany Wrocławskie - Boczna 16.96854516 51.03780318 18:17:00
+612 | Bielany Wrocławskie - Boczna 16.96854516 51.03780318 18:19:00 -> Ślęza - skrzyżowanie 16.98475 51.036997 18:22:00
+Destination: Ślęza - skrzyżowanie 16.98475 51.036997, time: 18:22:00
 ---------------------------------------------------------------------------------------------------------
-Travel time: 00:25:00
-Run time: 0.27318692207336426
-Starting point: Tczewska, time: 14:32:00
-118 | Tczewska 14:35:00 -> SĘPOLNO 14:44:00
-9 | SĘPOLNO 14:45:00 -> 8 Maja 14:47:00
-143 | 8 Maja 14:48:00 -> Armii Krajowej 14:56:00
-5 | Armii Krajowej 14:56:00 -> Park Wschodni 14:57:00
-Destination: Park Wschodni, time: 14:57:00
+Travel time: 00:27:00
+Run time: 1.3132240772247314
+Starting point: Tczewska 17.11194969 51.13060657, time: 14:32:00
+118 | Tczewska 17.11194969 51.13060657 14:35:00 -> SĘPOLNO 17.10379057 51.11377011 14:44:00
+143 | SĘPOLNO 17.10379057 51.11377011 14:45:00 -> Armii Krajowej 17.069773 51.087963 14:56:00
+Foot | Armii Krajowej 17.069773 51.087963 14:56:00 -> Armii Krajowej 17.06947 51.086705 14:58:00
+5 | Armii Krajowej 17.06947 51.086705 14:58:00 -> Park Wschodni 17.07219405 51.08488586 14:59:00
+Destination: Park Wschodni 17.07219405 51.08488586, time: 14:59:00
 ---------------------------------------------------------------------------------------------------------
-Travel time: 03:22:00
-Run time: 0.4963185787200928
-Starting point: Miękinia Cegielnia, time: 09:09:00
-948 | Miękinia Cegielnia 11:16:00 -> Średzka 11:39:00
-137 | Średzka 11:39:00 -> LEŚNICA 11:42:00
-148 | LEŚNICA 11:47:00 -> Wschowska 11:48:00
-10 | Wschowska 11:48:00 -> Złotnicka 11:49:00
-148 | Złotnicka 11:50:00 -> Jerzmanowska nr 17 11:57:00
-142 | Jerzmanowska nr 17 12:06:00 -> Piołunowa 12:10:00
-129 | Piołunowa 12:11:00 -> PORT LOTNICZY 12:19:00
-106 | PORT LOTNICZY 12:29:00 -> Rdestowa 12:31:00
-Destination: Rdestowa, time: 12:31:00
+Travel time: 03:26:00
+Run time: 3.2507638931274414
+Starting point: Miękinia Cegielnia 16.724634 51.188315, time: 09:09:00
+Foot | Miękinia Cegielnia 16.724634 51.188315 09:09:00 -> Miękinia Cegielnia 16.724656 51.188244 09:10:00
+948 | Miękinia Cegielnia 16.724656 51.188244 11:16:00 -> Średzka 16.86634894 51.14528565 11:39:00
+137 | Średzka 16.86634894 51.14528565 11:39:00 -> RUBCZAKA (Stacja kolejowa) 16.86689897 51.14303097 11:41:00
+948 | RUBCZAKA (Stacja kolejowa) 16.86689897 51.14303097 11:41:00 -> LEŚNICA 16.87155482 51.14467373 11:42:00
+Foot | LEŚNICA 16.87155482 51.14467373 11:42:00 -> LEŚNICA 16.87242206 51.1446593 11:48:00
+20 | LEŚNICA 16.87242206 51.1446593 11:51:00 -> Złotnicka 16.88999945 51.14375942 11:54:00
+Foot | Złotnicka 16.88999945 51.14375942 11:54:00 -> Złotnicka 16.88903391 51.14328049 11:55:00
+148 | Złotnicka 16.88903391 51.14328049 11:55:00 -> Wrocław Nowy Dwór (P+R) 16.952341 51.119883 12:10:00
+Foot | Wrocław Nowy Dwór (P+R) 16.952341 51.119883 12:10:00 -> Wrocław Nowy Dwór (P+R) 16.952288 51.119836 12:11:00
+13 | Wrocław Nowy Dwór (P+R) 16.952288 51.119836 12:11:00 -> Rogowska (P+R) 16.956017 51.110422 12:16:00
+Foot | Rogowska (P+R) 16.956017 51.110422 12:16:00 -> Rogowska (P+R) 16.95572 51.110391 12:17:00
+106 | Rogowska (P+R) 16.95572 51.110391 12:22:00 -> Rdestowa 16.88805774 51.11127473 12:35:00
+Destination: Rdestowa 16.88805774 51.11127473, time: 12:35:00
 ---------------------------------------------------------------------------------------------------------
