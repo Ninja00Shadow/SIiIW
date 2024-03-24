@@ -99,7 +99,8 @@ def mofified_astar_transfers(graph, start_stop, end_stop, connection):
 
             if next_connection[2] == "Footpath":
                 next_connection = (
-                shortest_distance[min_node]['connection'][1], shortest_distance[min_node]['connection'][1] + 60, "Foot")
+                    shortest_distance[min_node]['connection'][1], shortest_distance[min_node]['connection'][1] + 60,
+                    "Foot")
 
             transfers = 1 if not next_connection[2] == shortest_distance[min_node]['connection'][2] else 0
 
@@ -193,7 +194,7 @@ def tabu_search(graph, start_stop, required_stops_str, start_time):
     required_stops = required_stops_str.split(';')
 
     base_tabu_length = 5
-    scaling_factor = 0.5
+    scaling_factor = 0.3
     min_tabu_length = 3
     max_tabu_length = 20
 
@@ -202,6 +203,7 @@ def tabu_search(graph, start_stop, required_stops_str, start_time):
 
     current_solution = find_solution(graph, start_stop, required_stops, start_time)
     best_solution = current_solution
+    best_solution_fitness = calculate_time(current_solution)
     tabu_list = []
 
     max_iterations = 10
@@ -212,11 +214,11 @@ def tabu_search(graph, start_stop, required_stops_str, start_time):
         best_neighbor_fitness = float('inf')
 
         for neighbor in neighbors:
-            if neighbor not in tabu_list:
-                neighbor_fitness = calculate_time(neighbor)
-                if neighbor_fitness < best_neighbor_fitness:
-                    best_neighbor = neighbor
-                    best_neighbor_fitness = neighbor_fitness
+            neighbor_fitness = calculate_time(neighbor)
+            if neighbor_fitness < best_neighbor_fitness and (
+                    neighbor not in tabu_list or neighbor_fitness < best_solution_fitness):
+                best_neighbor = neighbor
+                best_neighbor_fitness = neighbor_fitness
 
         if best_neighbor is None:
             break
@@ -228,8 +230,7 @@ def tabu_search(graph, start_stop, required_stops_str, start_time):
 
         if calculate_time(best_neighbor) < calculate_time(best_solution):
             best_solution = best_neighbor
-
-    print()
+            best_solution_fitness = calculate_time(best_solution)
 
     return best_solution
 
@@ -272,34 +273,32 @@ def generate_neighbours_transfers(graph, current_solution, tabu_list, required_s
 def tabu_search_transfers(graph, start_stop, required_stops_str, start_time):
     required_stops = required_stops_str.split(';')
 
-    # Base parameters
     base_tabu_length = 5
-    scaling_factor = 0.5
+    scaling_factor = 0.3
     min_tabu_length = 3
     max_tabu_length = 20
 
-    # Dynamic tabu list length based on the number of required stops
     dynamic_tabu_length = int(base_tabu_length + len(required_stops) * scaling_factor)
     tabu_list_size = max(min_tabu_length, min(max_tabu_length, dynamic_tabu_length))
 
     current_solution = find_solution(graph, start_stop, required_stops, start_time)
     best_solution = current_solution
+    best_solution_fitness = calculate_number_of_transfers(current_solution)
     tabu_list = []
 
     max_iterations = 10
 
     for iteration in range(max_iterations):
-        print(iteration + 1, end=" ")
         neighbors = generate_neighbours_transfers(graph, current_solution, tabu_list, required_stops)
         best_neighbor = None
         best_neighbor_fitness = float('inf')
 
         for neighbor in neighbors:
-            if neighbor not in tabu_list:
-                neighbor_fitness = calculate_number_of_transfers(neighbor)
-                if neighbor_fitness < best_neighbor_fitness:
-                    best_neighbor = neighbor
-                    best_neighbor_fitness = neighbor_fitness
+            neighbor_fitness = calculate_number_of_transfers(neighbor)
+            if neighbor_fitness < best_neighbor_fitness and (
+                    neighbor not in tabu_list or neighbor_fitness < best_solution_fitness):
+                best_neighbor = neighbor
+                best_neighbor_fitness = neighbor_fitness
 
         if best_neighbor is None:
             break
@@ -311,8 +310,6 @@ def tabu_search_transfers(graph, start_stop, required_stops_str, start_time):
 
         if calculate_number_of_transfers(best_neighbor) < calculate_number_of_transfers(best_solution):
             best_solution = best_neighbor
-
-    print()
 
     return best_solution
 
