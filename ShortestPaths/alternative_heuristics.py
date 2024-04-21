@@ -48,10 +48,18 @@ def alt_astar(graph, start_stop, end_stop, previous_arrival_time):
         unseen_nodes.pop(min_node)
 
         for child_node in graph.get_edges(min_node):
-            connection, weight = get_closest_connection_and_weight(
-                child_node.connections,
-                shortest_distance[min_node]['connection'][1]
-            )
+            weight_foot = infinity
+            if min_node.name == child_node.end_stop.name and min_node.longitude != child_node.end_stop.longitude and min_node.latitude != child_node.end_stop.latitude:
+                weight_foot = 60
+                connection_foot = (shortest_distance[min_node]['connection'][1],
+                                   shortest_distance[min_node]['connection'][1] + weight_foot, "Foot")
+
+            connection, weight = get_closest_connection_and_weight(child_node.connections,
+                                                                   shortest_distance[min_node]['connection'][1])
+
+            if weight_foot < weight:
+                weight = weight_foot
+                connection = connection_foot
 
             if weight + shortest_distance[min_node]['cost'] < shortest_distance[child_node.end_stop]['cost']:
                 shortest_distance[child_node.end_stop]['cost'] = weight + shortest_distance[min_node]['cost']
@@ -106,6 +114,9 @@ def alt_astar_transfers(graph, start_stop, end_stop, previous_arrival_time):
         for child_node in graph.get_edges(min_node):
             next_connection = get_least_transfer_connection(child_node.connections,
                                                             shortest_distance[min_node]['connection'])
+
+            if next_connection[2] == "Footpath":
+                next_connection = (shortest_distance[min_node]['connection'][1], shortest_distance[min_node]['connection'][1] + 60, "Foot")
 
             transfers = 1 if not next_connection[2] == shortest_distance[min_node]['connection'][2] else 0
 

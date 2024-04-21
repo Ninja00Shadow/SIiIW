@@ -26,6 +26,8 @@ def convert_connection_graph_to_graph(connection_graph, graph):
                        connection['end_stop_lon']
                        )
 
+    graph.add_foot_edges()
+
 
 if __name__ == '__main__':
     proto_graph = read_connection_graph_file()

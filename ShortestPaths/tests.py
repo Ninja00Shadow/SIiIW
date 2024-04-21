@@ -20,10 +20,10 @@ def general_test_case(graph, criteria, start_stop, end_stop, start_time):
     alg_end_time = time.time()
 
     if criteria == 'dt' or criteria == 'at' or criteria == 'alt':
-        print(f"Travel time: {seconds_to_time(travel_time)}", file=sys.stderr, flush=True)
+        print(f"Travel time: {seconds_to_time(travel_time)}")
     elif criteria == 'p' or criteria == 'altp':
-        print(f"Number of transfers: {number_of_transfers}", file=sys.stderr, flush=True)
-    print(f"Run time: {alg_end_time - alg_start_time}", file=sys.stderr, flush=True)
+        print(f"Number of transfers: {number_of_transfers}")
+    print(f"Run time: {alg_end_time - alg_start_time}")
     print_path(path)
 
     print('---------------------------------------------------------------------------------------------------------')

@@ -47,18 +47,16 @@ class Vertex:
         self.latitude = float(latitude)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name} {self.longitude} {self.latitude}"
 
     def __repr__(self):
-        return f"{self.name}"
+        return f"{self.name} {self.longitude} {self.latitude}"
 
     def __eq__(self, other):
-        if type(other) is str:
-            return self.name == other
-        return self.name == other.name
+        return (self.name, self.longitude, self.latitude) == (other.name, other.longitude, other.latitude)
 
     def __hash__(self):
-        return hash(self.name)
+        return hash((self.name, self.longitude, self.latitude))
 
 
 class Graph:
@@ -67,8 +65,8 @@ class Graph:
 
     def add_edge(self, start_stop, end_stop, departure, arrival, line, start_stop_lat, start_stop_lon, end_stop_lat,
                  end_stop_lon):
-        start_vertex = Vertex(start_stop, start_stop_lat, start_stop_lon)
-        end_vertex = Vertex(end_stop, end_stop_lat, end_stop_lon)
+        start_vertex = Vertex(start_stop, start_stop_lon, start_stop_lat)
+        end_vertex = Vertex(end_stop, end_stop_lon, end_stop_lat)
 
         if start_vertex not in self.graph:
             self.graph[start_vertex] = []
@@ -91,6 +89,26 @@ class Graph:
 
     def get_vertex(self, name):
         return next((vertex for vertex in self.graph.keys() if vertex.name == name), None)
+
+    def get_vertexes_by_name(self, name):
+        return [vertex for vertex in self.graph.keys() if vertex.name == name]
+
+    def get_other_vertexes_by_name(self, full_vertex):
+        return [vertex for vertex in self.graph.keys() if vertex.name == full_vertex.name and vertex != full_vertex]
+
+    def add_foot_edges(self):
+        unseen_nodes = list(self.graph.keys())
+
+        for vertex in unseen_nodes:
+            similar_vertexes = self.get_other_vertexes_by_name(vertex)
+            unseen_nodes.remove(vertex)
+            for similar_vertex in similar_vertexes:
+                self.graph[vertex].append(
+                    Edge(similar_vertex, '00:00:00', '00:00:00', 'Footpath'))
+                self.graph[similar_vertex].append(
+                    Edge(vertex, '00:00:00', '00:00:00', 'Footpath'))
+                if similar_vertex in unseen_nodes:
+                    unseen_nodes.remove(similar_vertex)
 
     def __str__(self):
         return str(self.graph)

@@ -68,6 +68,10 @@ if __name__ == '__main__':
     stops_graph = Graph()
     convert_connection_graph_to_graph(proto_graph, stops_graph)
 
-    tabu_tests_time(stops_graph)
+    # tabu_tests_time(stops_graph)
 
-    # tabu_tests_transfers(stops_graph)
+    print()
+    print()
+    print()
+
+    tabu_tests_transfers(stops_graph)

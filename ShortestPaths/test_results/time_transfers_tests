@@ -1,72 +1,86 @@
 Time variant
 Travel time: 00:38:00
-Run time: 0.1363391876220703
-Starting point: Iwiny - rondo, time: 14:38:00
-145 | Iwiny - rondo 14:39:00 -> BARDZKA (Cmentarz) 14:48:00
-110 | BARDZKA (Cmentarz) 14:49:00 -> Morwowa 14:50:00
-136 | Morwowa 14:51:00 -> TARNOGAJ 14:53:00
-100 | TARNOGAJ 14:57:00 -> Karwińska 15:01:00
-5 | Karwińska 15:02:00 -> Armii Krajowej 15:04:00
-143 | Armii Krajowej 15:05:00 -> Chełmońskiego 15:10:00
-4 | Chełmońskiego 15:10:00 -> Tramwajowa 15:11:00
-315 | Tramwajowa 15:13:00 -> Hala Stulecia 15:16:00
-Destination: Hala Stulecia, time: 15:16:00
+Run time: 1.0899817943572998
+Starting point: Iwiny - rondo 17.06086879 51.04509727, time: 14:38:00
+145 | Iwiny - rondo 17.06086879 51.04509727 14:39:00 -> BARDZKA (Cmentarz) 17.0531783 51.07306135 14:48:00
+110 | BARDZKA (Cmentarz) 17.0531783 51.07306135 14:49:00 -> Bardzka 17.0492901 51.08347585 14:53:00
+Foot | Bardzka 17.0492901 51.08347585 14:53:00 -> Bardzka 17.05080816 51.08277944 14:55:00
+125 | Bardzka 17.05080816 51.08277944 14:55:00 -> Tarnogajska 17.05971235 51.08352541 14:57:00
+134 | Tarnogajska 17.05971235 51.08352541 15:00:00 -> Armii Krajowej (Bogedaina) 17.06622813 51.08552632 15:01:00
+143 | Armii Krajowej (Bogedaina) 17.06622813 51.08552632 15:04:00 -> Chełmońskiego 17.090271 51.10438 15:10:00
+Foot | Chełmońskiego 17.090271 51.10438 15:10:00 -> Chełmońskiego 17.09071195 51.10388356 15:11:00
+10 | Chełmońskiego 17.09071195 51.10388356 15:11:00 -> Hala Stulecia 17.07346452 51.10708825 15:15:00
+Foot | Hala Stulecia 17.07346452 51.10708825 15:15:00 -> Hala Stulecia 17.07372026 51.10689468 15:16:00
+Destination: Hala Stulecia 17.07372026 51.10689468, time: 15:16:00
 ---------------------------------------------------------------------------------------------------------
 
 Transfers variant
-Number of transfers: 1
-Run time: 0.08259081840515137
-Starting point: Iwiny - rondo, time: 14:38:00
-145 | Iwiny - rondo 14:39:00 -> Hala Stulecia 15:25:00
-Destination: Hala Stulecia, time: 15:25:00
+Number of transfers: 2
+Run time: 0.14342641830444336
+Starting point: Iwiny - rondo 17.06086879 51.04509727, time: 14:38:00
+145 | Iwiny - rondo 17.06086879 51.04509727 14:39:00 -> Hala Stulecia 17.07283232 51.10703996 15:25:00
+Foot | Hala Stulecia 17.07283232 51.10703996 15:25:00 -> Hala Stulecia 17.07372026 51.10689468 15:26:00
+Destination: Hala Stulecia 17.07372026 51.10689468, time: 15:26:00
 ---------------------------------------------------------------------------------------------------------
 
 
 
 Time variant
-Travel time: 01:26:00
-Run time: 0.10656261444091797
-Starting point: Miękinia Cegielnia, time: 14:16:00
-948 | Miękinia Cegielnia 14:46:00 -> Średzka 15:09:00
-148 | Średzka 15:09:00 -> Jerzmanowska nr 17 15:22:00
-129 | Jerzmanowska nr 17 15:24:00 -> PORT LOTNICZY 15:36:00
-106 | PORT LOTNICZY 15:40:00 -> Rdestowa 15:42:00
-Destination: Rdestowa, time: 15:42:00
+Travel time: 01:49:00
+Run time: 1.6808834075927734
+Starting point: Miękinia Cegielnia 16.724634 51.188315, time: 14:16:00
+Foot | Miękinia Cegielnia 16.724634 51.188315 14:16:00 -> Miękinia Cegielnia 16.724656 51.188244 14:17:00
+948 | Miękinia Cegielnia 16.724656 51.188244 14:46:00 -> Średzka 16.86634894 51.14528565 15:09:00
+137 | Średzka 16.86634894 51.14528565 15:09:00 -> LEŚNICA 16.87155482 51.14467373 15:12:00
+Foot | LEŚNICA 16.87155482 51.14467373 15:12:00 -> LEŚNICA 16.87199486 51.14518062 15:14:00
+148 | LEŚNICA 16.87199486 51.14518062 15:17:00 -> Jerzmanowska nr 9 16.90899381 51.12612064 15:28:00
+Foot | Jerzmanowska nr 9 16.90899381 51.12612064 15:28:00 -> Jerzmanowska nr 9 16.90989177 51.12608266 15:29:00
+142 | Jerzmanowska nr 9 16.90989177 51.12608266 15:33:00 -> Piołunowa 16.879508 51.121912 15:38:00
+Foot | Piołunowa 16.879508 51.121912 15:38:00 -> Piołunowa 16.87983 51.122669 15:39:00
+129 | Piołunowa 16.87983 51.122669 15:41:00 -> PORT LOTNICZY 16.879911 51.110198 15:49:00
+Foot | PORT LOTNICZY 16.879911 51.110198 15:49:00 -> PORT LOTNICZY 16.88238906 51.10935597 15:50:00
+106 | PORT LOTNICZY 16.88238906 51.10935597 15:55:00 -> Graniczna (Strachowicka) 16.89857603 51.1108012 15:58:00
+Foot | Graniczna (Strachowicka) 16.89857603 51.1108012 15:58:00 -> Graniczna (Strachowicka) 16.89822747 51.11101793 15:59:00
+106 | Graniczna (Strachowicka) 16.89822747 51.11101793 16:04:00 -> Rdestowa 16.88805774 51.11127473 16:05:00
+Destination: Rdestowa 16.88805774 51.11127473, time: 16:05:00
 ---------------------------------------------------------------------------------------------------------
 
 Transfers variant
-Number of transfers: 4
-Run time: 0.1432046890258789
-Starting point: Miękinia Cegielnia, time: 14:16:00
-948 | Miękinia Cegielnia 14:46:00 -> Rubczaka 15:10:00
-117 | Rubczaka 15:27:00 -> Piołunowa 15:59:00
-129 | Piołunowa 16:00:00 -> PORT LOTNICZY 16:08:00
-106 | PORT LOTNICZY 16:10:00 -> Rdestowa 16:12:00
-Destination: Rdestowa, time: 16:12:00
+Number of transfers: 6
+Run time: 2.6837921142578125
+Starting point: Miękinia Cegielnia 16.724634 51.188315, time: 14:16:00
+948 | Miękinia Cegielnia 16.724634 51.188315 14:25:00 -> Miękinia - stacja PKP 16.7356126 51.18825506 14:26:00
+958 | Miękinia - stacja PKP 16.7356126 51.18825506 17:41:00 -> LEŚNICA 16.87195907 51.14486208 19:07:00
+Foot | LEŚNICA 16.87195907 51.14486208 19:07:00 -> LEŚNICA 16.87199486 51.14518062 19:09:00
+148 | LEŚNICA 16.87199486 51.14518062 19:16:00 -> Chociebuska (C. K. Nowy Pafawag) 16.95805983 51.11467304 19:37:00
+927 | Chociebuska (C. K. Nowy Pafawag) 16.95805983 51.11467304 19:37:00 -> Rogowska (P+R) 16.95572 51.110391 19:41:00
+106 | Rogowska (P+R) 16.95572 51.110391 19:52:00 -> Rdestowa 16.88805774 51.11127473 20:05:00
+Destination: Rdestowa 16.88805774 51.11127473, time: 20:05:00
 ---------------------------------------------------------------------------------------------------------
 
 
 
 Time variant
-Travel time: 00:52:00
-Run time: 0.36670541763305664
-Starting point: Krucza, time: 15:05:00
-125 | Krucza 15:05:00 -> DWORZEC AUTOBUSOWY 15:16:00
-110 | DWORZEC AUTOBUSOWY 15:16:00 -> DWORZEC GŁÓWNY 15:19:00
-9 | DWORZEC GŁÓWNY 15:19:00 -> GALERIA DOMINIKAŃSKA 15:24:00
-12 | GALERIA DOMINIKAŃSKA 15:24:00 -> PL. GRUNWALDZKI 15:32:00
-911 | PL. GRUNWALDZKI 15:33:00 -> Kochanowskiego 15:35:00
-111 | Kochanowskiego 15:35:00 -> Psie Pole (Rondo Lotników Polskich) 15:50:00
-N | Psie Pole (Rondo Lotników Polskich) 15:50:00 -> Inflancka 15:57:00
-Destination: Inflancka, time: 15:57:00
+Travel time: 00:55:00
+Run time: 2.449974298477173
+Starting point: Krucza 17.00993331 51.09358878, time: 15:05:00
+Foot | Krucza 17.00993331 51.09358878 15:05:00 -> Krucza 17.0086204 51.09505335 15:06:00
+124 | Krucza 17.0086204 51.09505335 15:07:00 -> Rondo 17.01580755 51.09166813 15:11:00
+Foot | Rondo 17.01580755 51.09166813 15:11:00 -> Rondo 17.01712401 51.09069023 15:13:00
+7 | Rondo 17.01712401 51.09069023 15:13:00 -> Arkady (Capitol) 17.02896674 51.10093909 15:18:00
+Foot | Arkady (Capitol) 17.02896674 51.10093909 15:18:00 -> Arkady (Capitol) 17.02869906 51.10139121 15:20:00
+23 | Arkady (Capitol) 17.02869906 51.10139121 15:20:00 -> DWORZEC GŁÓWNY 17.03530935 51.10000186 15:23:00
+Foot | DWORZEC GŁÓWNY 17.03530935 51.10000186 15:23:00 -> DWORZEC GŁÓWNY 17.03540039 51.09960174 15:24:00
+N | DWORZEC GŁÓWNY 17.03540039 51.09960174 15:24:00 -> Inflancka 17.13041532 51.14235835 16:00:00
+Destination: Inflancka 17.13041532 51.14235835, time: 16:00:00
 ---------------------------------------------------------------------------------------------------------
 
 Transfers variant
 Number of transfers: 3
-Run time: 0.25114870071411133
-Starting point: Krucza, time: 15:05:00
-144 | Krucza 15:05:00 -> Broniewskiego 15:38:00
-130 | Broniewskiego 15:38:00 -> Psie Pole (Rondo Lotników Polskich) 16:04:00
-N | Psie Pole (Rondo Lotników Polskich) 16:05:00 -> Inflancka 16:12:00
-Destination: Inflancka, time: 16:12:00
+Run time: 1.0152480602264404
+Starting point: Krucza 17.00993331 51.09358878, time: 15:05:00
+A | Krucza 17.00993331 51.09358878 15:06:00 -> KRZYKI 17.00764649 51.07573947 13:49:00
+602 | KRZYKI 17.00764649 51.07573947 15:10:00 -> Zajezdnia Obornicka 17.02106859 51.14873744 16:33:00
+N | Zajezdnia Obornicka 17.02106859 51.14873744 20:27:00 -> Inflancka 17.13041532 51.14235835 21:14:00
+Destination: Inflancka 17.13041532 51.14235835, time: 21:14:00
 ---------------------------------------------------------------------------------------------------------
