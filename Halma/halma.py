@@ -167,6 +167,7 @@ def generate_moves_with_jumps(board, current_player, x, y, visited=None):
 def evaluate_board(state, current_player=1):
     opponent = 2 if current_player == 1 else 1
     player_target = (15, 15) if current_player == 1 else (0, 0)
+    dead_zone = (12, 12) if current_player == 1 else (3, 3)
     # opponent_target = (0, 0) if current_player == 1 else (15, 15)
 
     score_difference = 0
@@ -187,6 +188,9 @@ def evaluate_board(state, current_player=1):
                 #     player_score += 5
                 if distance <= 5:
                     player_score += 5
+
+                if x == dead_zone[0] and y == dead_zone[1]:
+                    player_score -= 20
                 # player_pieces += 1
                 score_difference += player_score
             # elif state.board[x][y] == opponent:
@@ -289,9 +293,9 @@ def initialize_game_board_19():
 
 
 def check_game_finished(board):
-    player_1 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (2, 0), (2, 1), (2, 2),
+    player_2 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (2, 0), (2, 1), (2, 2),
                 (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
-    player_2 = [(11, 14), (11, 15), (12, 13), (12, 14), (12, 15), (13, 12), (13, 13), (13, 14), (13, 15), (14, 11),
+    player_1 = [(11, 14), (11, 15), (12, 13), (12, 14), (12, 15), (13, 12), (13, 13), (13, 14), (13, 15), (14, 11),
                 (14, 12), (14, 13), (14, 14), (14, 15), (15, 11), (15, 12), (15, 13), (15, 14), (15, 15)]
 
     player_1_count = 0
@@ -338,11 +342,11 @@ def play_halma(board):
 
 def play_halma_ai_vs_ai(board):
     state = HalmaState(board, 1)
-    max_depth = 3
-    round = 0
+    max_depth = 2
+    game_round = 0
 
     while True:
-        print("Round: ", round)
+        print("Round: ", game_round)
         print(state)
 
         # _, ai1_move = minimax(state, max_depth, state.current_player == 1)
@@ -361,7 +365,13 @@ def play_halma_ai_vs_ai(board):
         state = state.make_move(ai2_move)
         state.current_player = 1
 
-        round += 1
+        if check_game_finished(state.board) != 0:
+            print("Game finished")
+            print("Winner: ", check_game_finished(state.board))
+            print(state.board)
+            break
+
+        game_round += 1
 
 
 def play_ai(state):
@@ -373,7 +383,7 @@ def play_ai(state):
 
 
 if __name__ == "__main__":
-    game_board = initialize_game_board_13()
+    game_board = initialize_game_board_19()
 
     # play_halma(game_board)
     play_halma_ai_vs_ai(game_board)
