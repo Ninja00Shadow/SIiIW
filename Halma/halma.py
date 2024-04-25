@@ -4,11 +4,19 @@ import numpy as np
 import time
 from copy import deepcopy
 
+from heuristics import *
+from board_functions import initialize_game_board_19, check_game_finished
+
 
 class HalmaState:
     def __init__(self, board, current_player):
         self.board = board
         self.current_player = current_player
+        self.player_1_targets = [(11, 14), (11, 15), (12, 13), (12, 14), (12, 15), (13, 12), (13, 13), (13, 14),
+                                 (13, 15), (14, 11), (14, 12), (14, 13), (14, 14), (14, 15), (15, 11), (15, 12),
+                                 (15, 13), (15, 14), (15, 15)]
+        self.player_2_targets = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4),
+                                 (2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
 
     def generate_moves(self):
         moves = []
@@ -27,6 +35,20 @@ class HalmaState:
         new_state.board[move.start[0]][move.start[1]] = 0
 
         return new_state
+
+    def pieces_on_target(self):
+        player_1_count = 0
+        player_2_count = 0
+
+        for x, y in self.player_1_targets:
+            if self.board[x][y] == 1:
+                player_1_count += 1
+
+        for x, y in self.player_2_targets:
+            if self.board[x][y] == 2:
+                player_2_count += 1
+
+        return player_1_count, player_2_count
 
     def __str__(self):
         return str(self.board)
@@ -126,113 +148,19 @@ def generate_moves_with_jumps(board, current_player, x, y, visited=None):
         jump_x, jump_y = new_x + dx, new_y + dy
         if 0 <= new_x < 16 and 0 <= new_y < 16 and (new_x, new_y) not in visited:
             if board[new_x][new_y] == 0:  # Simple move
-                move = Move((x, y), (new_x, new_y))
-                if check_if_legal_2(board, move, current_player):
-                    moves.append(move)
+                # move = Move((x, y), (new_x, new_y))
+                # if check_if_legal_2(board, move, current_player):
+                #     moves.append(move)
                 moves.append(Move((x, y), (new_x, new_y)))
             elif board[new_x][new_y] in [1, 2] and 0 <= jump_x < 16 and 16 > jump_y >= 0 == board[jump_x][jump_y] and (
                     jump_x, jump_y) not in visited:
-                move = Move((x, y), (jump_x, jump_y))
-                if check_if_legal_2(board, move, current_player):
-                    moves.append(move)
+                # move = Move((x, y), (jump_x, jump_y))
+                # if check_if_legal_2(board, move, current_player):
+                #     moves.append(move)
                 moves.append(Move((x, y), (jump_x, jump_y)))
 
                 moves.extend(generate_moves_with_jumps(board, current_player, jump_x, jump_y, visited.copy()))
     return moves
-
-
-def distance_heuristic(state, current_player=1):
-    player_target = (15, 15) if current_player == 1 else (0, 0)
-    dead_zone = (12, 12) if current_player == 1 else (3, 3)
-
-    player_score = 0
-
-    if check_game_finished(state.board) == current_player:
-        return math.inf
-
-    for y in range(16):
-        for x in range(16):
-            if state.board[x][y] == current_player:
-                distance = math.sqrt((x - player_target[0]) ** 2 + (y - player_target[1]) ** 2)
-                player_score += 22 - distance
-                if distance <= 5:
-                    player_score += 5
-
-                if x == dead_zone[0] and y == dead_zone[1]:
-                    player_score -= 20
-
-    return player_score
-
-
-def goal_dispersion_heuristic(state, current_player):
-    player_target = (15, 15) if current_player == 1 else (0, 0)
-    dead_zone = (12, 12) if current_player == 1 else (3, 3)
-    center_mass_x = 0
-    center_mass_y = 0
-    count = 0
-    progression_score = 0
-
-    penalty_zone_player_1 = {(0, 0): 10, (0, 1): 8, (0, 2): 6, (0, 3): 4, (0, 4): 2, (1, 0): 8, (1, 1): 6, (1, 2): 4,
-                             (1, 3): 2, (1, 4): 1, (2, 0): 6, (2, 1): 4, (2, 2): 2,
-                             (2, 3): 1, (3, 0): 4, (3, 1): 2, (3, 2): 1, (4, 0): 2, (4, 1): 1}
-    penalty_zone_player_2 = {(11, 14): 1, (11, 15): 2, (12, 13): 1, (12, 14): 2, (12, 15): 4, (13, 12): 1, (13, 13): 2,
-                             (13, 14): 4, (13, 15): 6, (14, 11): 1, (14, 12): 2, (14, 13): 4, (14, 14): 6, (14, 15): 8,
-                             (15, 11): 2, (15, 12): 4, (15, 13): 6, (15, 14): 8, (15, 15): 10}
-
-    penalty_zone = penalty_zone_player_1 if current_player == 1 else penalty_zone_player_2
-
-    for y in range(16):
-        for x in range(16):
-            if state.board[x][y] == current_player:
-                distance = math.sqrt((x - player_target[0]) ** 2 + (y - player_target[1]) ** 2)
-                progression_score += 22 - distance
-                if distance <= 5:
-                    progression_score += 5
-                if x == dead_zone[0] and y == dead_zone[1]:
-                    progression_score -= 7
-                if (x, y) in penalty_zone:
-                    progression_score -= penalty_zone[(x, y)]
-
-                center_mass_x += x
-                center_mass_y += y
-                count += 1
-
-    if count > 0:
-        center_mass_x /= count
-        center_mass_y /= count
-
-    dispersion_score = 0
-    for y in range(16):
-        for x in range(16):
-            if state.board[x][y] == current_player:
-                distance_to_center = math.sqrt((x - center_mass_x) ** 2 + (y - center_mass_y) ** 2)
-                dispersion_score += distance_to_center
-
-    return progression_score * 0.7 + dispersion_score * 0.3
-
-
-def wall_corner_heuristic(state, current_player):
-    target_x, target_y = (15, 15) if current_player == 1 else (0, 0)
-
-    edges_player_1 = {(11, 14): 9, (11, 15): 4, (12, 15): 4, (13, 15): 5, (14, 15): 6, (15, 15): 10,
-                      (15, 14): 6, (15, 13): 5, (15, 12): 4, (15, 11): 4, (14, 11): 9}
-    edges_player_2 = {(1, 0): 6, (2, 0): 5, (3, 0): 4, (4, 0): 4, (4, 1): 9, (0, 0): 10, (0, 1): 6,
-                      (0, 2): 5, (0, 3): 4, (0, 4): 4, (1, 4): 9}
-
-    edge_bonuses = edges_player_1 if current_player == 1 else edges_player_2
-
-    score = 0
-
-    for x in range(16):
-        for y in range(16):
-            if state.board[x][y] == current_player:
-                distance = math.sqrt((x - target_x) ** 2 + (y - target_y) ** 2)
-                score += 22 - distance
-
-                if (x, y) in edge_bonuses:
-                    score += edge_bonuses[(x, y)]
-
-    return score
 
 
 def minimax_alpha_beta(state, depth, alpha, beta, maximizing_now, heuristic=distance_heuristic):
@@ -291,65 +219,6 @@ def minimax(state, depth, maximizing_now, heuristic=distance_heuristic):
         return min_eval, None
 
 
-def initialize_game_board_13():
-    board = np.zeros((16, 16), dtype=int)
-
-    player_1 = [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (3, 0), (3, 1)]
-    player_2 = [(12, 14), (12, 15), (13, 13), (13, 14), (13, 15), (14, 12), (14, 13), (14, 14), (14, 15), (15, 12),
-                (15, 13), (15, 14), (15, 15)]
-
-    for x, y in player_1:
-        board[x][y] = 1
-
-    for x, y in player_2:
-        board[x][y] = 2
-
-    return board
-
-
-def initialize_game_board_19():
-    board = np.zeros((16, 16), dtype=int)
-
-    player_1 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (2, 0), (2, 1), (2, 2),
-                (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
-    player_2 = [(11, 14), (11, 15), (12, 13), (12, 14), (12, 15), (13, 12), (13, 13), (13, 14), (13, 15), (14, 11),
-                (14, 12), (14, 13), (14, 14), (14, 15), (15, 11), (15, 12), (15, 13), (15, 14), (15, 15)]
-
-    for x, y in player_1:
-        board[x][y] = 1
-
-    for x, y in player_2:
-        board[x][y] = 2
-
-    return board
-
-
-def check_game_finished(board):
-    player_2 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (2, 0), (2, 1), (2, 2),
-                (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
-    player_1 = [(11, 14), (11, 15), (12, 13), (12, 14), (12, 15), (13, 12), (13, 13), (13, 14), (13, 15), (14, 11),
-                (14, 12), (14, 13), (14, 14), (14, 15), (15, 11), (15, 12), (15, 13), (15, 14), (15, 15)]
-
-    player_1_count = 0
-    player_2_count = 0
-
-    for x, y in player_1:
-        if board[x][y] == 1:
-            player_1_count += 1
-
-    for x, y in player_2:
-        if board[x][y] == 2:
-            player_2_count += 1
-
-    if player_1_count == 19:
-        return 1
-
-    if player_2_count == 19:
-        return 2
-
-    return 0
-
-
 def play_halma(board):
     state = HalmaState(board, 1)
 
@@ -374,17 +243,29 @@ def play_halma(board):
 
 def play_halma_ai_vs_ai(board):
     state = HalmaState(board, 1)
-    max_depth = 2
+    max_depth_1 = 2
+    max_depth_2 = 2
     game_round = 0
 
     while True:
         print("Round: ", game_round)
+        player_1_pieces, player_2_pieces = state.pieces_on_target()
+        print(player_1_pieces, player_2_pieces)
         print(state)
 
+        # if player_1_pieces >= 18:
+        #     max_depth_1 = 3
+        # else:
+        #     max_depth_1 = 2
+        # if player_2_pieces >= 18:
+        #     max_depth_2 = 3
+        # else:
+        #     max_depth_2 = 2
+
         # MiniMax player
-        # _, ai1_move = minimax(state, max_depth, state.current_player == 1, heuristic=dispersion_heuristic)
-        _, ai1_move = minimax_alpha_beta(state, max_depth, float('-inf'), float('inf'), state.current_player == 1,
-                                         heuristic=goal_dispersion_heuristic)
+        # _, ai1_move = minimax(state, max_depth_1, state.current_player == 1, heuristic=distance_heuristic)
+        _, ai1_move = minimax_alpha_beta(state, max_depth_1, float('-inf'), float('inf'), state.current_player == 1,
+                                         heuristic=distance_heuristic)
         print(ai1_move)
         if ai1_move is None:
             print(state.generate_moves().__len__())
@@ -392,9 +273,9 @@ def play_halma_ai_vs_ai(board):
         state.current_player = 2
 
         # AlphaBeta player
-        # _, ai2_move = minimax(state, max_depth, state.current_player == 2)
-        _, ai2_move = minimax_alpha_beta(state, max_depth, float('-inf'), float('inf'), state.current_player == 2,
-                                         heuristic=goal_dispersion_heuristic)
+        # _, ai2_move = minimax(state, max_depth_2, state.current_player == 2, heuristic=distance_heuristic)
+        _, ai2_move = minimax_alpha_beta(state, max_depth_2, float('-inf'), float('inf'), state.current_player == 2,
+                                         heuristic=distance_heuristic)
         print(ai2_move)
         if ai2_move is None:
             print(state.generate_moves().__len__())
@@ -423,30 +304,3 @@ if __name__ == "__main__":
 
     # play_halma(game_board)
     play_halma_ai_vs_ai(game_board)
-
-# if __name__ == "__main__":
-#     game_board = initialize_game_board()
-#     state = HalmaState(game_board, 1)
-#     moves = state.generate_moves()
-#     for move in moves:
-#         print(move)
-#         print(state.make_move(move))
-
-# if __name__ == "__main__":
-#     game_board = np.zeros((16, 16), dtype=int)
-#
-#     penalty_zone_player_1 = {(0, 0): 10, (0, 1): 8, (0, 2): 6, (0, 3): 4, (0, 4): 2, (1, 0): 8, (1, 1): 6, (1, 2): 4,
-#                              (1, 3): 2, (1, 4): 1, (2, 0): 6, (2, 1): 4, (2, 2): 2,
-#                              (2, 3): 1, (3, 0): 4, (3, 1): 2, (3, 2): 1, (4, 0): 2, (4, 1): 1}
-#     penalty_zone_player_2 = {(11, 14): 1, (11, 15): 2, (12, 13): 1, (12, 14): 2, (12, 15): 4, (13, 12): 1, (13, 13): 2,
-#                              (13, 14): 4, (13, 15): 6, (14, 11): 1, (14, 12): 2, (14, 13): 4, (14, 14): 6, (14, 15): 8,
-#                              (15, 11): 2, (15, 12): 4, (15, 13): 6, (15, 14): 8, (15, 15): 10}
-#
-#     for x in range(16):
-#         for y in range(16):
-#             if (x, y) in penalty_zone_player_1:
-#                 game_board[x][y] = penalty_zone_player_1[(x, y)]
-#             elif (x, y) in penalty_zone_player_2:
-#                 game_board[x][y] = penalty_zone_player_2[(x, y)]
-#
-#     print(game_board)
