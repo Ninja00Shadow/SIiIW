@@ -17,6 +17,7 @@ class HalmaState:
                                  (15, 13), (15, 14), (15, 15)]
         self.player_2_targets = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4),
                                  (2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
+        self.last_move = None
 
     def generate_moves(self):
         moves = []
@@ -33,6 +34,8 @@ class HalmaState:
 
         new_state.board[move.end[0]][move.end[1]] = new_state.current_player
         new_state.board[move.start[0]][move.start[1]] = 0
+
+        self.last_move = move
 
         return new_state
 
@@ -55,6 +58,9 @@ class HalmaState:
 
     def __repr__(self):
         return str(self.board)
+
+    def __hash__(self):
+        return hash(self.board.tobytes() + bytes([self.current_player]))
 
 
 class Move:
@@ -194,9 +200,20 @@ def minimax_alpha_beta(state, depth, alpha, beta, maximizing_now, heuristic=dist
         return min_eval, None
 
 
+# transposition_table = {}
+
 def minimax(state, depth, maximizing_now, heuristic=distance_heuristic):
+    # state_hash = hash(state)
+    #
+    # if state_hash in transposition_table:
+    #     saved_depth, saved_value, saved_move = transposition_table[state_hash]
+    #     if saved_depth >= depth:
+    #         return saved_value, saved_move
+
     if depth == 0:
-        return heuristic(state, state.current_player), None
+        eval = heuristic(state, state.current_player)
+        # transposition_table[state_hash] = (depth, eval, state.last_move)
+        return eval, None
 
     if maximizing_now:
         max_eval = float('-inf')
@@ -208,6 +225,8 @@ def minimax(state, depth, maximizing_now, heuristic=distance_heuristic):
             if eval > max_eval:
                 max_eval = eval
                 best_move = move
+
+        # transposition_table[state_hash] = (depth, max_eval, best_move)
         return max_eval, best_move
     else:
         min_eval = float('inf')
@@ -216,6 +235,7 @@ def minimax(state, depth, maximizing_now, heuristic=distance_heuristic):
             new_state.current_player = 2 if state.current_player == 1 else 1
             eval, _ = minimax(new_state, depth - 1, True, heuristic)
             min_eval = min(min_eval, eval)
+        # transposition_table[state_hash] = (depth, min_eval, None)
         return min_eval, None
 
 
@@ -282,9 +302,10 @@ def play_halma_ai_vs_ai(board):
         state = state.make_move(ai2_move)
         state.current_player = 1
 
-        if check_game_finished(state.board) != 0:
+        win = check_game_finished(state.board, game_round)
+        if win != 0:
             print("Game finished")
-            print("Winner: ", check_game_finished(state.board))
+            print("Winner: ", win)
             print(state.board)
             break
 
@@ -302,5 +323,8 @@ def play_ai(state):
 if __name__ == "__main__":
     game_board = initialize_game_board_19()
 
+    start = time.time()
     # play_halma(game_board)
     play_halma_ai_vs_ai(game_board)
+    end = time.time()
+    print("Time: ", end - start)

@@ -3,38 +3,76 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-from board_functions import check_game_finished, initialize_game_board_19
+from board_functions import initialize_game_board_19
 
+
+# def distance_heuristic(state, current_player=1):
+#     player_target = (15, 15) if current_player == 1 else (0, 0)
+#     dead_zone = [(11, 13), (12, 12), (13, 11)] if current_player == 1 else [(4, 2), (3, 3), (2, 4)]
+#     golden_zone = [(11, 15), (11, 14), (13, 13), (15, 11), (14, 11)] if current_player == 1 else [(0, 4), (1, 4),
+#                                                                                                   (2, 2), (4, 0),
+#                                                                                                   (4, 1)]
+#
+#     player_score = 0
+#
+#     if check_game_finished(state.board) == current_player:
+#         return math.inf
+#
+#     for y in range(16):
+#         for x in range(16):
+#             if state.board[x][y] == current_player:
+#                 distance = math.sqrt((x - player_target[0]) ** 2 + (y - player_target[1]) ** 2)
+#                 player_score += 22 - distance
+#                 if distance <= 4:
+#                     player_score += 5
+#
+#                 if (x, y) in dead_zone[1]:
+#                     player_score -= 20
+#                 elif (x, y) in dead_zone:
+#                     player_score -= 7
+#
+#                 if (x, y) in golden_zone:
+#                     player_score += 15
+#
+#     return player_score
 
 def distance_heuristic(state, current_player=1):
     player_target = (15, 15) if current_player == 1 else (0, 0)
-    dead_zone = [(11, 13), (12, 12), (13, 11)] if current_player == 1 else [(4, 2), (3, 3), (2, 4)]
-    golden_zone = [(11, 15), (11, 14), (13, 13), (15, 11), (14, 11)] if current_player == 1 else [(0, 4), (1, 4),
-                                                                                                  (2, 2), (4, 0),
-                                                                                                  (4, 1)]
+    opponent_target = (0, 0) if current_player == 1 else (15, 15)
+    # dead_zone_player = {(11, 13), (12, 12), (13, 11)} if current_player == 1 else {(4, 2), (3, 3), (2, 4)}
+    dead_zone_player = (12, 12) if current_player == 1 else (3, 3)
+    golden_zone_player = {(11, 15), (11, 14), (13, 13), (15, 11), (14, 11)} if current_player == 1 else {(0, 4), (1, 4),
+                                                                                                         (2, 2), (4, 0),
+                                                                                                         (4, 1)}
 
     player_score = 0
-
-    if check_game_finished(state.board) == current_player:
-        return math.inf
+    opponent_score = 0
 
     for y in range(16):
         for x in range(16):
-            if state.board[x][y] == current_player:
-                distance = math.sqrt((x - player_target[0]) ** 2 + (y - player_target[1]) ** 2)
+            current_piece = state.board[x][y]
+            if current_piece == current_player:
+                dx, dy = x - player_target[0], y - player_target[1]
+                distance = math.sqrt(dx * dx + dy * dy)
                 player_score += 22 - distance
                 if distance <= 4:
                     player_score += 5
 
-                if (x, y) in dead_zone[1]:
+                if (x, y) == dead_zone_player:
                     player_score -= 20
-                elif (x, y) in dead_zone:
-                    player_score -= 7
+                # elif (x, y) in dead_zone_player:
+                #     player_score -= 7
 
-                if (x, y) in golden_zone:
+                if (x, y) in golden_zone_player:
                     player_score += 15
+            elif current_piece != 0:
+                dx, dy = x - opponent_target[0], y - opponent_target[1]
+                distance = math.sqrt(dx * dx + dy * dy)
+                opponent_score += 22 - distance
+                if distance <= 4:
+                    opponent_score += 5
 
-    return player_score
+    return player_score - opponent_score
 
 
 def goal_dispersion_heuristic(state, current_player):
@@ -271,17 +309,17 @@ def plot_heatmap(data, title='Heatmap', xlabel='X axis', ylabel='Y axis', cmap='
 
 
 if __name__ == '__main__':
-    # player_1, player_2 = distance_visualization()
+    player_1, player_2 = distance_visualization()
 
-    # plot_heatmap(player_1, title='Distance Heuristic player 1', xlabel='', ylabel='', cmap='plasma')
-    # plot_heatmap(player_2, title='Distance Heuristic player 2', xlabel='', ylabel='', cmap='plasma')
+    plot_heatmap(player_1, title='Distance Heuristic player 1', xlabel='', ylabel='', cmap='plasma')
+    plot_heatmap(player_2, title='Distance Heuristic player 2', xlabel='', ylabel='', cmap='plasma')
 
     player_1, player_2 = dispersion_visualization()
 
     plot_heatmap(player_1, title='Dispersion Heuristic player 1', xlabel='', ylabel='', cmap='plasma')
-    # plot_heatmap(player_2, title='Dispersion Heuristic player 2', xlabel='', ylabel='', cmap='plasma')
+    plot_heatmap(player_2, title='Dispersion Heuristic player 2', xlabel='', ylabel='', cmap='plasma')
 
-    # player_1, player_2 = wall_corner_visualization()
-    #
-    # plot_heatmap(player_1, title='Wall Corner Heuristic player 1', xlabel='', ylabel='', cmap='plasma')
-    # plot_heatmap(player_2, title='Wall Corner Heuristic player 2', xlabel='', ylabel='', cmap='plasma')
+    player_1, player_2 = wall_corner_visualization()
+
+    plot_heatmap(player_1, title='Wall Corner Heuristic player 1', xlabel='', ylabel='', cmap='plasma')
+    plot_heatmap(player_2, title='Wall Corner Heuristic player 2', xlabel='', ylabel='', cmap='plasma')

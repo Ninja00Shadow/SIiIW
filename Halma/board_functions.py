@@ -33,7 +33,10 @@ def initialize_game_board_19():
     return board
 
 
-def check_game_finished(board):
+def check_game_finished(board, round):
+    if round < 100:
+        return 0
+
     player_2 = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (2, 0), (2, 1), (2, 2),
                 (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
     player_1 = [(11, 14), (11, 15), (12, 13), (12, 14), (12, 15), (13, 12), (13, 13), (13, 14), (13, 15), (14, 11),
