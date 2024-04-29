@@ -17,7 +17,7 @@ class HalmaState:
                                  (15, 13), (15, 14), (15, 15)]
         self.player_2_targets = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4),
                                  (2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1)]
-        self.last_move = None
+        # self.last_move = None
 
     def generate_moves(self):
         moves = []
@@ -29,15 +29,23 @@ class HalmaState:
         moves = set(moves)
         return list(moves)
 
+    # def make_move(self, move):
+    #     new_state = deepcopy(self)
+    #
+    #     new_state.board[move.end[0]][move.end[1]] = new_state.current_player
+    #     new_state.board[move.start[0]][move.start[1]] = 0
+    #
+    #     # self.last_move = move
+    #
+    #     return new_state
+
     def make_move(self, move):
-        new_state = deepcopy(self)
+        self.board[move.end[0]][move.end[1]] = self.current_player
+        self.board[move.start[0]][move.start[1]] = 0
 
-        new_state.board[move.end[0]][move.end[1]] = new_state.current_player
-        new_state.board[move.start[0]][move.start[1]] = 0
-
-        self.last_move = move
-
-        return new_state
+    def unmove(self, move):
+        self.board[move.start[0]][move.start[1]] = self.current_player
+        self.board[move.end[0]][move.end[1]] = 0
 
     def pieces_on_target(self):
         player_1_count = 0
@@ -177,9 +185,11 @@ def minimax_alpha_beta(state, depth, alpha, beta, maximizing_now, heuristic=dist
         max_eval = float('-inf')
         best_move = None
         for move in state.generate_moves():
-            new_state = state.make_move(move)
-            new_state.current_player = 2 if state.current_player == 1 else 1
-            eval, _ = minimax_alpha_beta(new_state, depth - 1, alpha, beta, False, heuristic)
+            state.make_move(move)
+            state.current_player = 2 if state.current_player == 1 else 1
+            eval, _ = minimax_alpha_beta(state, depth - 1, alpha, beta, False, heuristic)
+            state.current_player = 2 if state.current_player == 1 else 1
+            state.unmove(move)
             if eval > max_eval:
                 max_eval = eval
                 best_move = move
@@ -190,9 +200,11 @@ def minimax_alpha_beta(state, depth, alpha, beta, maximizing_now, heuristic=dist
     else:
         min_eval = float('inf')
         for move in state.generate_moves():
-            new_state = state.make_move(move)
-            new_state.current_player = 2 if state.current_player == 1 else 1
-            eval, _ = minimax_alpha_beta(new_state, depth - 1, alpha, beta, True, heuristic)
+            state.make_move(move)
+            state.current_player = 2 if state.current_player == 1 else 1
+            eval, _ = minimax_alpha_beta(state, depth - 1, alpha, beta, True, heuristic)
+            state.current_player = 2 if state.current_player == 1 else 1
+            state.unmove(move)
             min_eval = min(min_eval, eval)
             beta = min(beta, eval)
             if beta <= alpha:
@@ -200,65 +212,56 @@ def minimax_alpha_beta(state, depth, alpha, beta, maximizing_now, heuristic=dist
         return min_eval, None
 
 
-# transposition_table = {}
-
 def minimax(state, depth, maximizing_now, heuristic=distance_heuristic):
-    # state_hash = hash(state)
-    #
-    # if state_hash in transposition_table:
-    #     saved_depth, saved_value, saved_move = transposition_table[state_hash]
-    #     if saved_depth >= depth:
-    #         return saved_value, saved_move
-
     if depth == 0:
-        eval = heuristic(state, state.current_player)
-        # transposition_table[state_hash] = (depth, eval, state.last_move)
-        return eval, None
+        return heuristic(state, state.current_player), None
 
     if maximizing_now:
         max_eval = float('-inf')
         best_move = None
         for move in state.generate_moves():
-            new_state = state.make_move(move)
-            new_state.current_player = 2 if state.current_player == 1 else 1
-            eval, _ = minimax(new_state, depth - 1, False, heuristic)
+            state.make_move(move)
+            state.current_player = 2 if state.current_player == 1 else 1
+            eval, _ = minimax(state, depth - 1, False, heuristic)
+            state.current_player = 2 if state.current_player == 1 else 1
+            state.unmove(move)
             if eval > max_eval:
                 max_eval = eval
                 best_move = move
 
-        # transposition_table[state_hash] = (depth, max_eval, best_move)
         return max_eval, best_move
     else:
         min_eval = float('inf')
         for move in state.generate_moves():
-            new_state = state.make_move(move)
-            new_state.current_player = 2 if state.current_player == 1 else 1
-            eval, _ = minimax(new_state, depth - 1, True, heuristic)
+            state.make_move(move)
+            state.current_player = 2 if state.current_player == 1 else 1
+            eval, _ = minimax(state, depth - 1, True, heuristic)
+            state.current_player = 2 if state.current_player == 1 else 1
+            state.unmove(move)
             min_eval = min(min_eval, eval)
-        # transposition_table[state_hash] = (depth, min_eval, None)
         return min_eval, None
 
 
-def play_halma(board):
-    state = HalmaState(board, 1)
-
-    while True:
-        print(state)
-
-        start_position = input("Wybierz pionek: ")
-        end_position = input("Wybierz pole docelowe: ")
-        move = Move((int(start_position[0]), int(start_position[1])), (int(end_position[0]), int(end_position[1])))
-
-        if move.check_if_legal(state):
-            state = state.make_move(move)
-            state.current_player = 2
-
-            ai_move = play_ai(state)
-            state = state.make_move(ai_move)
-            state.current_player = 1
-        else:
-            print("Ruch nielegalny")
-            continue
+# def play_halma(board):
+#     state = HalmaState(board, 1)
+#
+#     while True:
+#         print(state)
+#
+#         start_position = input("Wybierz pionek: ")
+#         end_position = input("Wybierz pole docelowe: ")
+#         move = Move((int(start_position[0]), int(start_position[1])), (int(end_position[0]), int(end_position[1])))
+#
+#         if move.check_if_legal(state):
+#             state = state.make_move(move)
+#             state.current_player = 2
+#
+#             ai_move = play_ai(state)
+#             state = state.make_move(ai_move)
+#             state.current_player = 1
+#         else:
+#             print("Ruch nielegalny")
+#             continue
 
 
 def play_halma_ai_vs_ai(board):
@@ -283,23 +286,21 @@ def play_halma_ai_vs_ai(board):
         #     max_depth_2 = 2
 
         # MiniMax player
-        # _, ai1_move = minimax(state, max_depth_1, state.current_player == 1, heuristic=distance_heuristic)
-        _, ai1_move = minimax_alpha_beta(state, max_depth_1, float('-inf'), float('inf'), state.current_player == 1,
-                                         heuristic=distance_heuristic)
+        _, ai1_move = minimax(state, max_depth_1, state.current_player == 1, heuristic=distance_heuristic)
+        # _, ai1_move = minimax_alpha_beta(state, max_depth_1, float('-inf'), float('inf'), True,
+        #                                  heuristic=distance_heuristic)
         print(ai1_move)
         if ai1_move is None:
             print(state.generate_moves().__len__())
-        state = state.make_move(ai1_move)
+        state.make_move(ai1_move)
         state.current_player = 2
 
         # AlphaBeta player
-        # _, ai2_move = minimax(state, max_depth_2, state.current_player == 2, heuristic=distance_heuristic)
-        _, ai2_move = minimax_alpha_beta(state, max_depth_2, float('-inf'), float('inf'), state.current_player == 2,
-                                         heuristic=distance_heuristic)
+        _, ai2_move = minimax(state, max_depth_2, state.current_player == 2, heuristic=distance_heuristic)
+        # _, ai2_move = minimax_alpha_beta(state, max_depth_2, float('-inf'), float('inf'), True,
+        #                                  heuristic=distance_heuristic)
         print(ai2_move)
-        if ai2_move is None:
-            print(state.generate_moves().__len__())
-        state = state.make_move(ai2_move)
+        state.make_move(ai2_move)
         state.current_player = 1
 
         win = check_game_finished(state.board, game_round)
@@ -312,12 +313,12 @@ def play_halma_ai_vs_ai(board):
         game_round += 1
 
 
-def play_ai(state):
-    max_depth = 3
-
-    _, best_move = minimax(state, max_depth, state.current_player == 2)
-
-    return best_move
+# def play_ai(state):
+#     max_depth = 3
+#
+#     _, best_move = minimax(state, max_depth, state.current_player == 2)
+#
+#     return best_move
 
 
 if __name__ == "__main__":
