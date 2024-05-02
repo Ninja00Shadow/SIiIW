@@ -210,7 +210,6 @@ def minimax_alpha_beta_2(state, depth, alpha, beta, maximizing_now):
 
     if depth == 0:
         evals = [distance_heuristic(state, state.current_player),
-                 goal_dispersion_heuristic(state, state.current_player),
                  wall_corner_heuristic(state, state.current_player), manhattan_heuristic(state, state.current_player)]
         return max(evals), None, node_count
 
