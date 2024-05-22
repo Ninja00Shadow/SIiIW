@@ -8,15 +8,14 @@ def test0():
 
     engine.reset()
 
-    engine.declare(Drum(unbalanced_load=False, additional_water=False, jerking=False))
-    engine.declare(Door(closed=True, caught_laundry=False, water_leak=False))
-    engine.declare(DetergentDrawer(too_much_detergent=False, fabric_softener_remaining=False))
-    engine.declare(WaterOutlet(blocked=False, caught=False, jammed=False, connected_too_high=False, water_leak=False,
-                    damaged=False, connected_correctly=True))
-    engine.declare(DrainPipe(blocked=False, caught=False, jammed=False, unapproved_extension=False))
-    engine.declare(PowerCord(plugged_in=True))
-    engine.declare(Button(flashing=False))
-    engine.declare(Display(on=True, errors=[]))
+    engine.declare(Drum())
+    engine.declare(Door())
+    engine.declare(DetergentDrawer())
+    engine.declare(WaterOutlet())
+    engine.declare(DrainPipe())
+    engine.declare(PowerCord())
+    engine.declare(Button())
+    engine.declare(Display(errors=[]))
     engine.declare(Program())
 
     engine.run()
@@ -116,7 +115,7 @@ def test5():
     engine.declare(DrainPipe())
     engine.declare(PowerCord())
     engine.declare(Button(name="Start/Pause", flashing=True))
-    engine.declare(Display(on=False))
+    engine.declare(Display(on=False, errors=[]))
     engine.declare(Program())
 
     engine.run()

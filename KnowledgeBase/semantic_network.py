@@ -1,29 +1,28 @@
 from experta import *
 
 
-class WashingMachine(Fact):
-    """Specific appliance: a washing machine."""
-    pass
-
-
 class Drum(Fact):
+    """Represents the drum of the washing machine."""
     unbalanced_load = Field(bool, default=False)
     additional_water = Field(bool, default=False)
     jerking = Field(bool, default=False)
 
 
 class Door(Fact):
+    """Represents the door of the washing machine."""
     closed = Field(bool, default=True)
     caught_laundry = Field(bool, default=False)
     water_leak = Field(bool, default=False)
 
 
 class DetergentDrawer(Fact):
+    """Represents the detergent drawer."""
     too_much_detergent = Field(bool, default=False)
     fabric_softener_remaining = Field(bool, default=False)
 
 
 class WaterOutlet(Fact):
+    """Represents the water outlet hose."""
     blocked = Field(bool, default=False)
     caught = Field(bool, default=False)
     jammed = Field(bool, default=False)
@@ -38,6 +37,7 @@ class WaterOutlet(Fact):
 
 
 class DrainPipe(Fact):
+    """Represents the drain pipe."""
     blocked = Field(bool, default=False)
     caught = Field(bool, default=False)
     jammed = Field(bool, default=False)
@@ -48,6 +48,7 @@ class DrainPipe(Fact):
 
 
 class PowerCord(Fact):
+    """Represents the power cord."""
     plugged_in = Field(bool, default=True)
 
 
@@ -93,8 +94,12 @@ class SemanticNetwork(KnowledgeEngine):
     @Rule(
         AS.display << Display(errors=MATCH.errors),
         TEST(lambda errors: "E:30/-20" in errors),
-        OR(AS.drum << Drum(additional_water=True), AS.drawer << DetergentDrawer(too_much_detergent=True)))
-    def remove_excess_water(self, display, errors, drum=None, drawer=None):
+        OR(
+            AS.drum << Drum(additional_water=True),
+            AS.drawer << DetergentDrawer(too_much_detergent=True)
+        )
+    )
+    def remove_excess_water(self, errors, drum=None, drawer=None):
         if drum:
             print("Fix: Do not add any extra water to the appliance while it is operating.")
             self.modify(drum, additional_water=False)
@@ -102,7 +107,15 @@ class SemanticNetwork(KnowledgeEngine):
             print("Fix: Reduce the amount of detergent for the next washing cycle with the same load.")
             self.modify(drawer, too_much_detergent=False)
 
-        self.modify(display, errors=[e for e in errors if e != "E:30/-20"])
+    @Rule(
+        AS.display << Display(errors=MATCH.errors),
+        TEST(lambda errors: "E:30/-20" in errors),
+        Drum(additional_water=False),
+        DetergentDrawer(too_much_detergent=False),
+    )
+    def remove_error_e30_20(self, display, errors):
+        errors = [e for e in errors if e != "E:30/-20"]
+        self.modify(display, errors=errors)
 
     @Rule(AS.drum << Drum(jerking=True))
     def motor_test(self, drum):
